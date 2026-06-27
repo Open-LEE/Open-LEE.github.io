@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>李嘉杰 · Homepage</title>
+  <meta name="description" content="李嘉杰的个人主页">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1976D2; --bg: #ffffff; --card-bg: #ffffff;
+      --text: #1a1a1a; --text-light: #555; --text-muted: #888;
+      --border: #e8e8e8; --radius: 12px; --nav-height: 56px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.7; padding-top: var(--nav-height);
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { color: #1565C0; }
+
+    .masthead {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-height);
+      background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .masthead__inner {
+      max-width: 100%; margin: 0; height: 100%;
+      display: flex; align-items: center; padding: 0 24px;
+    }
+    .masthead__brand {
+      font-weight: 700; font-size: 1em; color: var(--text);
+      flex-shrink: 0; white-space: nowrap;
+    }
+    .nav-links {
+      display: flex; align-items: center;
+      margin-left: auto; list-style: none; gap: 2px;
+    }
+    .nav-links a {
+      color: var(--text-muted); font-size: 0.85em;
+      padding: 6px 12px; white-space: nowrap;
+      border-radius: 6px; transition: all 0.2s;
+    }
+    .nav-links a:hover { background: #E3F2FD; color: var(--primary); }
+    .nav-links .lang-btn {
+      font-weight: 600; color: var(--primary);
+      border: 1px solid var(--primary); padding: 3px 10px; font-size: 0.8em;
+    }
+
+    .page-wrap { max-width: 1200px; margin: 0 auto; padding: 32px 32px 50px; display: flex; gap: 32px; }
+    .sidebar { width: 270px; flex-shrink: 0; }
+    .main { flex: 1; min-width: 0; }
+
+    .sidebar-card {
+      background: var(--card-bg); border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      padding: 28px 22px; position: sticky; top: calc(var(--nav-height) + 24px);
+      border: 1px solid var(--border);
+    }
+    .avatar {
+      width: 140px; height: 140px; border-radius: 50%;
+      object-fit: cover; margin: 0 auto 14px; display: block;
+      box-shadow: 0 4px 14px rgba(25,118,210,0.15);
+      border: 3px solid #fff; outline: 1px solid var(--border);
+    }
+    .sidebar-card h2 { text-align: center; font-size: 1.25em; }
+    .sidebar-card .subtitle { text-align: center; color: var(--text-muted); font-size: 0.82em; margin-bottom: 18px; }
+    .contact-list { list-style: none; }
+    .contact-list li {
+      margin-bottom: 9px; font-size: 0.85em;
+      display: flex; align-items: center; gap: 8px; color: var(--text-light);
+    }
+    .contact-list i { width: 16px; text-align: center; color: var(--primary); }
+    .contact-list a { color: var(--text-light); display: inline-flex; align-items: center; gap: 6px; }
+    .contact-list a:hover { color: var(--primary); }
+
+    .section {
+      margin-bottom: 18px; border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid var(--border); transition: box-shadow 0.3s; background: var(--card-bg);
+    }
+    .section:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
+    .section-header {
+      padding: 14px 20px; cursor: pointer; user-select: none;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 1em; font-weight: 600; color: var(--text);
+      background: linear-gradient(135deg, #f8f9fa 0%, #eef1f5 100%);
+    }
+    .section-header:hover { background: linear-gradient(135deg, #f0f4f8 0%, #e4e9f0 100%); }
+    .section-header i { color: var(--primary); width: 20px; text-align: center; }
+    .section-header .label { flex: 1; }
+    .arrow { font-size: 0.65em; color: #999; transition: transform 0.25s; }
+    .arrow.open { transform: rotate(90deg); }
+    .section-body { padding: 16px 20px 20px; border-top: 1px solid var(--border); }
+    .section-body.hidden { display: none; }
+
+    .timeline-item { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-date {
+      flex-shrink: 0; min-width: 95px;
+      font-size: 0.78em; font-weight: 600; color: #fff;
+      background: var(--primary); padding: 3px 10px; border-radius: 4px;
+      height: fit-content; text-align: center; margin-top: 3px;
+    }
+    .timeline-date.orange { background: linear-gradient(135deg, #FF5722, #FF9800); }
+    .timeline-date.green { background: linear-gradient(135deg, #2E7D32, #4CAF50); }
+    .timeline-date.purple { background: linear-gradient(135deg, #7B1FA2, #9C27B0); }
+    .timeline-date.red { background: linear-gradient(135deg, #C62828, #E53935); }
+    .timeline-body { flex: 1; }
+    .timeline-body h3 { font-size: 0.95em; font-weight: 600; margin-bottom: 2px; }
+    .timeline-body .meta { color: var(--text-muted); font-size: 0.82em; margin-bottom: 4px; }
+    .timeline-body p { font-size: 0.88em; color: var(--text-light); }
+    .timeline-body ul { padding-left: 16px; margin-top: 4px; }
+    .timeline-body ul li { font-size: 0.88em; color: var(--text-light); margin-bottom: 3px; }
+    .tag { display: inline-block; font-size: 0.72em; font-weight: 600; padding: 2px 9px; border-radius: 12px; margin-left: 4px; vertical-align: middle; }
+
+    .honor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .honor-item { padding: 11px 14px; border-radius: 8px; background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%); border: 1px solid var(--border); font-size: 0.88em; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
+    .honor-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .honor-item i { color: #FFD700; width: 18px; text-align: center; }
+
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 18px; }
+    .skill-group { flex: 1; min-width: 170px; }
+    .skill-group h4 { font-size: 0.85em; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .skill-pill { display: inline-block; padding: 4px 12px; font-size: 0.8em; font-weight: 500; border-radius: 20px; margin: 0 4px 6px 0; transition: all 0.2s; }
+    .skill-pill:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+    .pill-lang { background: #E3F2FD; color: #1565C0; } .pill-data { background: #E8F5E9; color: #2E7D32; } .pill-tool { background: #ECEFF1; color: #37474F; } .pill-web { background: #FFF3E0; color: #E65100; } .pill-lge { background: #FCE4EC; color: #C62828; }
+
+    .course-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .course-tag { display: inline-block; padding: 4px 11px; font-size: 0.8em; border-radius: 6px; background: #f5f5f5; color: var(--text-light); border: 1px solid #e8e8e8; }
+
+    .eval-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .eval-item { padding: 11px 14px; border-radius: 8px; background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%); border: 1px solid var(--border); font-size: 0.88em; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
+    .eval-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .eval-item i { color: var(--primary); width: 18px; text-align: center; }
+
+    .about-text p { font-size: 0.92em; color: var(--text-light); margin-bottom: 10px; line-height: 1.8; }
+
+    #backToTop { display: none; position: fixed; bottom: 28px; right: 28px; z-index: 99; width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--primary); color: #fff; font-size: 1em; cursor: pointer; box-shadow: 0 4px 14px rgba(25,118,210,0.35); opacity: 0; transition: all 0.25s; }
+    #backToTop:hover { transform: translateY(-3px); }
+
+    .site-footer { text-align: center; padding: 18px 24px 30px; font-size: 0.8em; color: #aaa; }
+
+    @media (max-width: 768px) { .page-wrap { flex-direction: column; padding: 16px 14px; } .sidebar { width: 100%; } .sidebar-card { position: static; } .honor-grid, .eval-list { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .timeline-item { flex-direction: column; gap: 4px; } .timeline-date { align-self: flex-start; min-width: auto; } }
+  </style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="masthead__inner">
+      <span class="masthead__brand">Homepage</span>
+      <ul class="nav-links">
+        <li><a href="#about">关于</a></li>
+        <li><a href="#education">教育</a></li>
+        <li><a href="#projects">项目</a></li>
+        <li><a href="#honors">荣誉</a></li>
+        <li><a href="#skills">技能</a></li>
+        <li><a href="#courses">课程</a></li>
+        <li><a href="#evaluation">评价</a></li>
+        <li><a href="index_en.html" class="lang-btn">EN</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <img src="images/lijiajie.jpg" alt="李嘉杰" class="avatar">
+        <h2>李嘉杰</h2>
+        <p class="subtitle">PhD Candidate</p>
+        <ul class="contact-list">
+          <li><i class="fas fa-map-marker-alt"></i> Wuhan</li>
+          <li><a href="mailto:2023102130028@whu.edu.cn"><i class="fas fa-envelope"></i> Email</a></li>
+          <li><a href="https://github.com/Open-LEE" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="main">
+
+      <section id="about" class="section">
+        <div class="section-header" onclick="toggle(this)">
+          <i class="fas fa-user"></i>
+          <span class="label">About Me</span>
+          <span class="arrow open">&#9654;</span>
+        </div>
+        <div class="section-body">
+          <div class="about-text">
+            <p>厦门大学环境与生态学院环境生态工程专业本科生，同时修读王亚南经济研究院统计学（数理）双学位。友善真诚、细致专注、责任心强，具备良好的学习能力和动手能力。</p>
+            <p>热爱运动、爱好音乐，坚持利用课余时间锻炼身体和陶冶情操。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="education" class="section">
+        <div class="section-header" onclick="toggle(this)">
+          <i class="fas fa-graduation-cap"></i>
+          <span class="label">教育背景</span>
+          <span class="arrow open">&#9654;</span>
+        </div>
+        <div class="section-body">
+          <div class="timeline-item">
+            <div class="timeline-date">2019.09–2022.06</div>
+            <div class="timeline-body">
+              <h3>厦门大学 · 环境与生态学院</h3>
+              <div class="meta">环境生态工程 · 排名 4/29</div>
+              <ul>
+                <li>《陆海统筹下海岸带景观连接度模型构建》（2020X855）</li>
+                <li>《光伏建筑一体化板块指数发展趋势分析及预测》</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2019.09–2022.06</div>
+            <div class="timeline-body">
+              <h3>厦门大学 · 王亚南经济研究院</h3>
+              <div class="meta">统计学（数理）双学位</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section">
+        <div class="section-header" onclick="toggle(this)">
+          <i class="fas fa-flask"></i>
+          <span class="label">项目经历</span>
+          <span class="arrow open">&#9654;</span>
+        </div>
+        <div class="section-body">
+          <div class="timeline-item">
+            <div class="timeline-date">2020.06–2021.12</div>
+            <div class="timeline-body">
+              <h3>大学生创新创业项目</h3>
+              <div class="meta">厦门大学 · 负责人</div>
+              <p>负责项目整体规划与推进，协调团队分工合作。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date green">2020–2021</div>
+            <div class="timeline-body">
+              <h3>陆海统筹下海岸带景观连接度模型构建</h3>
+              <div class="meta">项目编号：2020X855</div>
+              <p>基于景观连接度理论的空间生态网络和景观廊道构建，实现核心区聚类分析及生境阻力预测。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date orange">2021.07</div>
+            <div class="timeline-body">
+              <h3>海丝云——基于海丝星座的遥感应用服务项目</h3>
+              <div class="meta">第7届厦门大学"互联网+"创新创业大赛 · 金奖</div>
+              <p>利用云平台和遥感算法完成数据预处理，输出水体提取、植被分类等核心数据。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date green">2021.09</div>
+            <div class="timeline-body">
+              <h3>基于多目标决策的原材料订购与转运策略</h3>
+              <div class="meta">高教社杯全国大学生数学建模竞赛 · 福建省一等奖</div>
+              <p>采用模拟退火和多目标规划算法优化订购转运方案，LSTM预测产能上限。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date purple">2022.02</div>
+            <div class="timeline-body">
+              <h3>Forward or Backward: Investment Strategy of Volatile Assets</h3>
+              <div class="meta">MCM · Honorable Mention</div>
+              <p>使用SA和LSTM模型获得最优投资策略，蒙特卡洛方法验证有效性。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date red">2021.05</div>
+            <div class="timeline-body">
+              <h3>光伏建筑一体化板块指数发展趋势分析及预测</h3>
+              <div class="meta">第十三届"中国电机工程学会杯"数学建模竞赛 · 全国一等奖</div>
+              <p>基于ARIMA、LSTM预测板块指数，TOPSIS分析优化投资方案。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="honors" class="section">
+        <div class="section-header" onclick="toggle(this)">
+          <i class="fas fa-trophy"></i>
+          <span class="label">荣誉奖励</span>
+          <span class="arrow open">&#9654;</span>
+        </div>
+        <div class="section-body">
+          <div class="honor-grid">
+            <div class="honor-item"><i class="fas fa-award"></i> "王淑景、王文斗"奖学金</div>
+            <div class="honor-item"><i class="fas fa-award"></i> "斯坦道及远东"公益奖学金</div>
+            <div class="honor-item"><i class="fas fa-medal"></i> 校优秀团支部书记</div>
+            <div class="honor-item"><i class="fas fa-medal"></i> 校优秀学生干部</div>
+            <div class="honor-item"><i class="fas fa-medal"></i> 校三好学生</div>
+            <div class="honor-item"><i class="fas fa-trophy"></i> 数学建模全国一等奖</div>
+            <div class="honor-item"><i class="fas fa-trophy"></i> MCM Honorable Mention</div>
+            <div class="honor-item"><i class="fas fa-trophy"></i> "互联网+"创新创业大赛金奖</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <div class="section-header" onclick="toggle(this)">
+          <i class="fas fa-tools"></i>
+          <span class="label">专业技能</span>
+          <span class="arrow open">&#9654;</span>
+        </div>
+        <div class="section-body">
+          <div class="skills-grid">
+            <div class="skill-group">
+              <h4><i class="fas fa-code"></i> 编程软件</h4>
+              <span class="skill-pill pill-lang">Python</span>
+              <span class="skill-pill pill-lang">Matlab</span>
+              <span class="skill-pill pill-lang">R</span>
+              <span class="skill-pill pill-lang">Stata</span>
+            </div>
+            <div class="skill-group">
+              <h4><i class="fas fa-globe"></i> GIS 软件</h4>
+              <span class="skill-pill pill-data">ArcGIS</span>
+              <span class="skill-pill pill-data">Google Earth</span>
+              <span class="skill-pill pill-data">ENVI</span>
+            </div>
+            <div class="skill-group">
+              <h4><i class="fas fa-cube"></i> 专业软件</h4>
+              <span class="skill-pill pill-tool">AutoCAD</span>
+              <span class="skill-pill pill-tool">Photoshop</span>
+              <span class="skill-pill pill-tool">Gabi</span>
+              <span class="skill-pill pill-tool">Leap</span>
+            </div>
+            <div class="skill-group">
+              <h4><i class="fas fa-file-alt"></i> 排版软件</h4>
+              <span class="skill-pill pill-web">Word</span>
+              <span class="skill-pill pill-web">TeX</span>
+            </div>
+            <div class="skill-group">
+              <h4><i class="fas fa-language"></i> 语言技能</h4>
+              <span class="skill-pill pill-lge">CET4（558）</span>
+              <span class="skill-pill pill-lge">CET6（515）</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="courses" class="section">
+        <div class="section-header" onclick="toggle(this)">
+          <i class="fas fa-book"></i>
+          <span class="label">主要课程</span>
+          <span class="arrow open">&#9654;</span>
+        </div>
+        <div class="section-body">
+          <div class="course-tags">
+            <span class="course-tag">微积分II-2（93）</span>
+            <span class="course-tag">大学物理B（100）</span>
+            <span class="course-tag">地理信息系统概论（96）</span>
+            <span class="course-tag">工程流体力学（92）</span>
+            <span class="course-tag">AutoCAD 与计算机绘图（91）</span>
+            <span class="course-tag">ArcGIS 软件实践与操作（94）</span>
+            <span class="course-tag">C 程序设计基础（96）</span>
+            <span class="course-tag">生态环境大数据分析（91）</span>
+            <span class="course-tag">计算数据分析（84）</span>
+            <span class="course-tag">经济学原理（87）</span>
+            <span class="course-tag">公共经济学（86）</span>
+            <span class="course-tag">离散数学（89）</span>
+            <span class="course-tag">数据挖掘（89）</span>
+            <span class="course-tag">神经网络设计（89）</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="evaluation" class="section">
+        <div class="section-header" onclick="toggle(this)">
+          <i class="fas fa-heart"></i>
+          <span class="label">自我评价</span>
+          <span class="arrow open">&#9654;</span>
+        </div>
+        <div class="section-body">
+          <div class="eval-list">
+            <div class="eval-item"><i class="fas fa-smile"></i> 友善真诚，做事细致专注</div>
+            <div class="eval-item"><i class="fas fa-shield-alt"></i> 责任心较强</div>
+            <div class="eval-item"><i class="fas fa-graduation-cap"></i> 学习能力好，擅长自学</div>
+            <div class="eval-item"><i class="fas fa-search"></i> 对感兴趣的问题深入钻研</div>
+            <div class="eval-item"><i class="fas fa-lightbulb"></i> 敢于创新，动手能力强</div>
+            <div class="eval-item"><i class="fas fa-running"></i> 勇于实践想法</div>
+            <div class="eval-item"><i class="fas fa-dumbbell"></i> 热爱运动，坚持锻炼</div>
+            <div class="eval-item"><i class="fas fa-music"></i> 爱好音乐，陶冶情操</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="site-footer">Last updated: 2026-06-28</footer>
+  <button id="backToTop">&#9650;</button>
+
+  <script>
+    function toggle(h) {
+      var b = h.nextElementSibling;
+      var a = h.querySelector('.arrow');
+      if (b.classList.contains('hidden')) { b.classList.remove('hidden'); a.classList.add('open'); }
+      else { b.classList.add('hidden'); a.classList.remove('open'); }
+    }
+    (function(){
+      var btn = document.getElementById('backToTop');
+      window.addEventListener('scroll', function(){
+        btn.style.display = window.scrollY > 400 ? 'block' : 'none';
+        btn.style.opacity = window.scrollY > 400 ? '1' : '0';
+      });
+      btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    })();
+  </script>
+</body>
+</html>
