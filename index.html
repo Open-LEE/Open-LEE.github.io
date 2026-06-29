@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>李嘉杰 · Homepage</title>
-  <meta name="description" content="李嘉杰的个人主页">
+  <title>Jiajie Li · Homepage</title>
+  <meta name="description" content="Jiajie Li - Personal Homepage">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
@@ -15,7 +15,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background: var(--bg); color: var(--text); line-height: 1.7; padding-top: var(--nav-height);
     }
     a { color: var(--primary); text-decoration: none; }
@@ -45,10 +45,6 @@
       border-radius: 6px; transition: all 0.2s;
     }
     .nav-links a:hover { background: #E3F2FD; color: var(--primary); }
-    .nav-links .lang-btn {
-      font-weight: 600; color: var(--primary);
-      border: 1px solid var(--primary); padding: 3px 10px; font-size: 0.8em;
-    }
 
     .page-wrap { max-width: 1200px; margin: 0 auto; padding: 32px 32px 50px; display: flex; gap: 32px; }
     .sidebar { width: 270px; flex-shrink: 0; }
@@ -83,19 +79,52 @@
       border: 1px solid var(--border); transition: box-shadow 0.3s; background: var(--card-bg);
     }
     .section:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); }
-    .section-header {
-      padding: 14px 20px; cursor: pointer; user-select: none;
-      display: flex; align-items: center; gap: 10px;
-      font-size: 1em; font-weight: 600; color: var(--text);
-      background: linear-gradient(135deg, #f8f9fa 0%, #eef1f5 100%);
-    }
-    .section-header:hover { background: linear-gradient(135deg, #f0f4f8 0%, #e4e9f0 100%); }
-    .section-header i { color: var(--primary); width: 20px; text-align: center; }
-    .section-header .label { flex: 1; }
-    .arrow { font-size: 0.65em; color: #999; transition: transform 0.25s; }
-    .arrow.open { transform: rotate(90deg); }
     .section-body { padding: 16px 20px 20px; border-top: 1px solid var(--border); }
     .section-body.hidden { display: none; }
+
+    .section h1 {
+      margin: 0; padding: 14px 20px;
+      font-size: 1.25em; font-weight: 700;
+      cursor: pointer; user-select: none;
+      display: flex; align-items: center; gap: 8px;
+      color: var(--text); border-bottom: 1px solid var(--border);
+      transition: filter 0.2s;
+    }
+    .section h1:hover { filter: brightness(0.94); }
+    .section h1 .toggle-arrow {
+      font-size: 0.7em; margin-right: 10px;
+      color: rgba(0,0,0,0.3); transition: transform 0.25s;
+      transform: rotate(90deg);
+    }
+    .section h1.open .toggle-arrow { transform: rotate(0deg); }
+
+    .section .sh-about .toggle-arrow { color: #1976D2; }
+    .section .sh-research .toggle-arrow { color: #7B1FA2; }
+    .section .sh-edu .toggle-arrow { color: #4CAF50; }
+    .section .sh-project .toggle-arrow { color: #FF9800; }
+    .section .sh-honor .toggle-arrow { color: #FBC02D; }
+    .section .sh-skill .toggle-arrow { color: #00796B; }
+    .section .sh-course .toggle-arrow { color: #3949AB; }
+    .section-count {
+      margin-left: auto; font-size: 0.65em; font-weight: 700;
+      min-width: 20px; height: 20px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 50%; color: #fff;
+    }
+    #research .research-block:hover { background: #FBF5FB; border-color: #E1BEE7; }
+    #education .edu-item:hover { background: #F5FBF0; border-radius: 8px; }
+    #projects .timeline-item:hover { background: #FFFBF0; border-radius: 6px; }
+    #honors .honor-item:hover { background: #FFFDF5; }
+    #skills .skill-group:hover { background: #F0FAF0; border-radius: 8px; padding: 4px 8px; margin: -4px -8px; }
+    #courses .course-tag:hover { background: #F5F5FF; }
+
+    .sh-about { background: #E3F2FD; }
+    .sh-research { background: #F3E5F5; }
+    .sh-edu { background: #E8F5E9; }
+    .sh-project { background: #FFF3E0; }
+    .sh-honor { background: #FFF8E1; }
+    .sh-skill { background: #E0F2F1; }
+    .sh-course { background: #E8EAF6; }
 
     .timeline-item { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
     .timeline-item:last-child { border-bottom: none; }
@@ -116,6 +145,80 @@
     .timeline-body ul { padding-left: 16px; margin-top: 4px; }
     .timeline-body ul li { font-size: 0.88em; color: var(--text-light); margin-bottom: 3px; }
     .tag { display: inline-block; font-size: 0.72em; font-weight: 600; padding: 2px 9px; border-radius: 12px; margin-left: 4px; vertical-align: middle; }
+    .tag-blue { background: #E3F2FD; color: #1565C0; } .tag-orange { background: #FFF3E0; color: #E65100; } .tag-green { background: #E8F5E9; color: #2E7D32; } .tag-purple { background: #F3E5F5; color: #7B1FA2; } .tag-red { background: #FFEBEE; color: #C62828; }
+    .research-list {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .research-block {
+      padding: 12px 16px; border-radius: 8px;
+      font-size: 0.92em; font-weight: 500;
+      display: flex; align-items: center; gap: 12px;
+      background: #f8f9fa; border: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+
+
+    .edu-item {
+      display: flex; gap: 20px; align-items: flex-start;
+      padding: 8px 0;
+    }
+    .edu-logo {
+      flex-shrink: 0; width: 70px;
+    }
+    .edu-logo img {
+      width: 70px; height: 70px;
+      object-fit: cover; border-radius: 10px;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .edu-info {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; gap: 3px;
+      padding-top: 4px;
+    }
+    .edu-school {
+      font-weight: 700; font-size: 1.12em;
+      color: var(--text);
+    }
+    .edu-desc {
+      font-size: 0.95em; color: var(--text-light);
+    }
+    .edu-major {
+      font-size: 0.93em; font-style: italic; color: var(--text-light);
+    }
+    .edu-location {
+      font-size: 0.88em; color: var(--text-muted);
+      margin-bottom: 3px;
+    }
+    .edu-meta {
+      font-size: 0.88em; color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .edu-bullets {
+      margin-top: 4px; padding-left: 2px;
+    }
+    .edu-bullet {
+      font-size: 0.92em; line-height: 1.8;
+    }
+    .bullet-marker { color: #4CAF50; }
+    .bullet-text { color: var(--text-light); }
+    .edu-divider {
+      height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 10px 0 10px 100px;
+    }
+    .research-icon { font-size: 1.2em; }
+    
+    
+    
+    
+    .rc-green .r-icon { background: linear-gradient(135deg, #2E7D32, #66BB6A); }
+    
+    
+    
+    .rc-teal .r-icon { background: linear-gradient(135deg, #00897B, #26A69A); }
+    
+    .rc-red .r-icon { background: linear-gradient(135deg, #C62828, #EF5350); }
+    
 
     .honor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .honor-item { padding: 11px 14px; border-radius: 8px; background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%); border: 1px solid var(--border); font-size: 0.88em; display: flex; align-items: center; gap: 10px; transition: all 0.2s; }
@@ -137,8 +240,6 @@
     .eval-item:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
     .eval-item i { color: var(--primary); width: 18px; text-align: center; }
 
-    .about-text p { font-size: 0.92em; color: var(--text-light); margin-bottom: 10px; line-height: 1.8; }
-
     #backToTop { display: none; position: fixed; bottom: 28px; right: 28px; z-index: 99; width: 40px; height: 40px; border-radius: 50%; border: none; background: var(--primary); color: #fff; font-size: 1em; cursor: pointer; box-shadow: 0 4px 14px rgba(25,118,210,0.35); opacity: 0; transition: all 0.25s; }
     #backToTop:hover { transform: translateY(-3px); }
 
@@ -146,7 +247,33 @@
 
     @media (max-width: 768px) { .page-wrap { flex-direction: column; padding: 16px 14px; } .sidebar { width: 100%; } .sidebar-card { position: static; } .honor-grid, .eval-list { grid-template-columns: 1fr; } }
     @media (max-width: 600px) { .timeline-item { flex-direction: column; gap: 4px; } .timeline-date { align-self: flex-start; min-width: auto; } }
-  </style>
+  
+    .subsec { margin-bottom: 10px; border: 1px solid #e8e8e8; border-radius: 8px; overflow: hidden; }
+    .subsec-title {
+      padding: 10px 16px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.92em; font-weight: 500; color: var(--text);
+    }
+    .subsec-toggle {
+      padding: 3px 16px; cursor: pointer; user-select: none;
+      display: flex; align-items: center;
+      border-top: 1px solid #f0f0f0;
+      font-size: 0.6em; color: #aaa;
+      transition: background 0.2s;
+    }
+    .subsec-toggle:hover { background: rgba(0,0,0,0.03); }
+    .subsec-toggle .toggle-arrow { transition: transform 0.25s; }
+    .subsec-toggle.open .toggle-arrow { transform: rotate(90deg); }
+    .subsec-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 6px;
+      color: #fff; font-size: 0.78em; flex-shrink: 0;
+    }
+    .sh-research-sub1 .subsec-icon { background: #7B1FA2; }
+    .sh-research-sub2 .subsec-icon { background: #5E35B1; }
+    .sh-research-sub3 .subsec-icon { background: #C62828; }
+    .subsec-body p { font-size: 0.88em; color: var(--text-light); line-height: 1.6; margin: 0; }
+</style>
 </head>
 <body>
 
@@ -154,14 +281,14 @@
     <div class="masthead__inner">
       <span class="masthead__brand">Homepage</span>
       <ul class="nav-links">
-        <li><a href="#about">关于</a></li>
-        <li><a href="#education">教育</a></li>
-        <li><a href="#projects">项目</a></li>
-        <li><a href="#honors">荣誉</a></li>
-        <li><a href="#skills">技能</a></li>
-        <li><a href="#courses">课程</a></li>
-        <li><a href="#evaluation">评价</a></li>
-        <li><a href="index_en.html" class="lang-btn">EN</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#projects">Project
+s</a></li>
+        <li><a href="#honors">Honors</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#courses">Courses</a></li>
       </ul>
     </div>
   </header>
@@ -170,8 +297,8 @@
 
     <aside class="sidebar">
       <div class="sidebar-card">
-        <img src="images/lijiajie.jpg" alt="李嘉杰" class="avatar">
-        <h2>李嘉杰</h2>
+        <img src="images/lijiajie.jpg" alt="Jiajie Li" class="avatar">
+        <h2>Jiajie Li<br><span style="font-size:0.75em;font-weight:400;color:#888;">(李嘉杰)</span></h2>
         <p class="subtitle">PhD Candidate</p>
         <ul class="contact-list">
           <li><i class="fas fa-map-marker-alt"></i> Wuhan</li>
@@ -184,225 +311,203 @@
     <main class="main">
 
       <section id="about" class="section">
-        <div class="section-header" onclick="toggle(this)">
-          <i class="fas fa-user"></i>
-          <span class="label">About Me</span>
-          <span class="arrow open">&#9654;</span>
-        </div>
+        <h1 class="sh-about" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128214; About Me </h1>
         <div class="section-body">
           <div class="about-text">
-            <p>厦门大学环境与生态学院环境生态工程专业本科生，同时修读王亚南经济研究院统计学（数理）双学位。友善真诚、细致专注、责任心强，具备良好的学习能力和动手能力。</p>
-            <p>热爱运动、爱好音乐，坚持利用课余时间锻炼身体和陶冶情操。</p>
+            <p>&#127891; I am Jiajie Li, a PhD candidate based in Wuhan, with research focusing on computer vision and spatiotemporal image processing. I specialize in image spatiotemporal reconstruction, conducting algorithm research on core vision tasks including image inpainting and resolution enhancement. I am currently developing a unified research framework that integrates spatial features, temporal dependencies, and multi-source data. With solid hands-on experience in image processing and deep learning implementation, I hold a strong passion for exploring cutting-edge advances in computer vision.</p>
+            <p>&#127793; Coming from an interdisciplinary background in environmental ecology, remote sensing, and mathematical statistics, I have long been enthusiastic about cross-domain integration research in computer vision. My research journey began with spatial data analysis and temporal modeling practices. Starting from traditional image processing and statistical analysis methods, I have progressively delved into deep learning-driven image reconstruction and multi-source information fusion. This cross-disciplinary growth has laid a solid mathematical foundation for me, and fostered my mindset of approaching vision problems from real-world scenarios. I highly value every opportunity for technical exploration and collaborative research.</p>
+            <p>&#128187; I always believe in the power of continuous learning and sincere collaboration. Outside of research, I enjoy sports and music to stay energized. I keep a sustained focus and strong curiosity for frontier directions including image and video processing and multimodal large models. I am open to exchanging technical insights and sharing practical experience, and look forward to collaborating with peers from diverse backgrounds. Feel free to reach out to me anytime .it would be my great pleasure to have academic discussions, technical exchanges, or project cooperation with you.</p>
           </div>
         </div>
       </section>
-
-      <section id="education" class="section">
-        <div class="section-header" onclick="toggle(this)">
-          <i class="fas fa-graduation-cap"></i>
-          <span class="label">教育背景</span>
-          <span class="arrow open">&#9654;</span>
-        </div>
+      <section id="research" class="section">
+        <h1 class="sh-research" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128300; Research Areas </h1>
         <div class="section-body">
-          <div class="timeline-item">
-            <div class="timeline-date">2019.09–2022.06</div>
-            <div class="timeline-body">
-              <h3>厦门大学 · 环境与生态学院</h3>
-              <div class="meta">环境生态工程 · 排名 4/29</div>
-              <ul>
-                <li>《陆海统筹下海岸带景观连接度模型构建》（2020X855）</li>
-                <li>《光伏建筑一体化板块指数发展趋势分析及预测》</li>
-              </ul>
+          <div class="research-list">
+            <div class="research-block">
+              <span class="research-icon">&#129504;</span>
+              <span class="research-label">Spatiotemporal Image Reconstruction</span>
             </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2019.09–2022.06</div>
-            <div class="timeline-body">
-              <h3>厦门大学 · 王亚南经济研究院</h3>
-              <div class="meta">统计学（数理）双学位</div>
+            <div class="research-block">
+              <span class="research-icon">&#128065;</span>
+              <span class="research-label">Computer Vision</span>
+            </div>
+            <div class="research-block">
+              <span class="research-icon">&#127919;</span>
+              <span class="research-label">Object Extraction &amp; Tracking</span>
             </div>
           </div>
         </div>
       </section>
-
-      <section id="projects" class="section">
-        <div class="section-header" onclick="toggle(this)">
-          <i class="fas fa-flask"></i>
-          <span class="label">项目经历</span>
-          <span class="arrow open">&#9654;</span>
+<section id="education" class="section">
+        <h1 class="sh-edu" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#127891; Education <span class="section-count" style="background:#4CAF50;">2</span></h1>
+        <div class="section-body">
+          <div class="edu-item">
+            <div class="edu-logo">
+              <img src="images/WHU.webp" alt="Wuhan University">
+            </div>
+            <div class="edu-info">
+              <div class="edu-school">Wuhan University</div>
+              <div class="edu-major">Ph.D. in Photogrammetry &amp; Remote Sensing</div>
+              <div class="edu-location">&#128205; Wuhan &middot; Sept 2023 &ndash; Present</div>
+            </div>
+          </div>
+          <div class="edu-divider"></div>
+          <div class="edu-item">
+            <div class="edu-logo">
+              <img src="images/xmu_logo.jpeg" alt="Xiamen University">
+            </div>
+            <div class="edu-info">
+              <div class="edu-school">Xiamen University</div>
+              <div class="edu-major">B.S. in Environmental Ecological Engineering &amp; Statistics (Dual Degree)</div>
+              <div class="edu-location">&#128205; Xiamen &middot; Sept 2019 &ndash; June 2023</div>
+            </div>
+          </div>
         </div>
+      </section><section id="projects" class="section">
+        <h1 class="sh-project" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128187; Projects <span class="section-count" style="background:#FF9800;">6</span></h1>
         <div class="section-body">
           <div class="timeline-item">
-            <div class="timeline-date">2020.06–2021.12</div>
+            <div class="timeline-date">2020.06&ndash;2021.12</div>
             <div class="timeline-body">
-              <h3>大学生创新创业项目</h3>
-              <div class="meta">厦门大学 · 负责人</div>
-              <p>负责项目整体规划与推进，协调团队分工合作。</p>
+              <h3>Innovation Program <span class="tag tag-blue">Lead</span></h3>
+              <div class="meta">Xiamen University</div>
+              <p>Led project planning, execution, and team coordination.</p>
             </div>
           </div>
           <div class="timeline-item">
-            <div class="timeline-date green">2020–2021</div>
+            <div class="timeline-date green">2020&ndash;2021</div>
             <div class="timeline-body">
-              <h3>陆海统筹下海岸带景观连接度模型构建</h3>
-              <div class="meta">项目编号：2020X855</div>
-              <p>基于景观连接度理论的空间生态网络和景观廊道构建，实现核心区聚类分析及生境阻力预测。</p>
+              <h3>Land-Sea Coastal Landscape Connectivity Modeling</h3>
+              <div class="meta">Project No. 2020X855</div>
+              <p>Constructed spatial ecological networks based on landscape connectivity theory. Performed core area clustering and habitat resistance prediction.</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-date orange">2021.07</div>
             <div class="timeline-body">
-              <h3>海丝云——基于海丝星座的遥感应用服务项目</h3>
-              <div class="meta">第7届厦门大学"互联网+"创新创业大赛 · 金奖</div>
-              <p>利用云平台和遥感算法完成数据预处理，输出水体提取、植被分类等核心数据。</p>
+              <h3>Ocean Cloud &mdash; Remote Sensing Service Platform</h3>
+              <div class="meta">7th XMU Innovation Competition <span class="tag tag-orange">Gold Award</span></div>
+              <p>Leveraged cloud processing and remote sensing algorithms for data calibration, water extraction, and vegetation classification.</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-date green">2021.09</div>
             <div class="timeline-body">
-              <h3>基于多目标决策的原材料订购与转运策略</h3>
-              <div class="meta">高教社杯全国大学生数学建模竞赛 · 福建省一等奖</div>
-              <p>采用模拟退火和多目标规划算法优化订购转运方案，LSTM预测产能上限。</p>
+              <h3>Multi-Objective Ordering &amp; Transport Strategy</h3>
+              <div class="meta">China Collegiate Math Contest <span class="tag tag-green">Fujian 1st Prize</span></div>
+              <p>Used simulated annealing and multi-objective programming. LSTM for capacity forecasting.</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-date purple">2022.02</div>
             <div class="timeline-body">
               <h3>Forward or Backward: Investment Strategy of Volatile Assets</h3>
-              <div class="meta">MCM · Honorable Mention</div>
-              <p>使用SA和LSTM模型获得最优投资策略，蒙特卡洛方法验证有效性。</p>
+              <div class="meta">MCM <span class="tag tag-purple">Honorable Mention</span></div>
+              <p>Employed SA and LSTM for investment strategies. Validated via Monte Carlo methods.</p>
             </div>
           </div>
           <div class="timeline-item">
             <div class="timeline-date red">2021.05</div>
             <div class="timeline-body">
-              <h3>光伏建筑一体化板块指数发展趋势分析及预测</h3>
-              <div class="meta">第十三届"中国电机工程学会杯"数学建模竞赛 · 全国一等奖</div>
-              <p>基于ARIMA、LSTM预测板块指数，TOPSIS分析优化投资方案。</p>
+              <h3>BIPV Stock Index Trend Analysis &amp; Forecasting</h3>
+              <div class="meta">13th CSEE Cup Math Contest <span class="tag tag-red">National 1st Prize</span></div>
+              <p>Forecasted stock indices using ARIMA, LSTM. TOPSIS for investment optimization.</p>
             </div>
           </div>
         </div>
       </section>
 
       <section id="honors" class="section">
-        <div class="section-header" onclick="toggle(this)">
-          <i class="fas fa-trophy"></i>
-          <span class="label">荣誉奖励</span>
-          <span class="arrow open">&#9654;</span>
-        </div>
+        <h1 class="sh-honor" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#127942; Honors &amp; Awards </h1>
         <div class="section-body">
           <div class="honor-grid">
-            <div class="honor-item"><i class="fas fa-award"></i> "王淑景、王文斗"奖学金</div>
-            <div class="honor-item"><i class="fas fa-award"></i> "斯坦道及远东"公益奖学金</div>
-            <div class="honor-item"><i class="fas fa-medal"></i> 校优秀团支部书记</div>
-            <div class="honor-item"><i class="fas fa-medal"></i> 校优秀学生干部</div>
-            <div class="honor-item"><i class="fas fa-medal"></i> 校三好学生</div>
-            <div class="honor-item"><i class="fas fa-trophy"></i> 数学建模全国一等奖</div>
-            <div class="honor-item"><i class="fas fa-trophy"></i> MCM Honorable Mention</div>
-            <div class="honor-item"><i class="fas fa-trophy"></i> "互联网+"创新创业大赛金奖</div>
+            <div class="honor-item"><i class="fas fa-award"></i> Wang Shujing &amp; Wang Wendou Scholarship</div>
+            <div class="honor-item"><i class="fas fa-award"></i> Standard &amp; Far East Scholarship</div>
+            <div class="honor-item"><i class="fas fa-medal"></i> Outstanding League Secretary</div>
+            <div class="honor-item"><i class="fas fa-medal"></i> Outstanding Student Leader</div>
+            <div class="honor-item"><i class="fas fa-medal"></i> Merit Student</div>
+            <div class="honor-item"><i class="fas fa-trophy" style="color:#FFD700"></i> National 1st Prize &mdash; Math Modeling</div>
+            <div class="honor-item"><i class="fas fa-trophy" style="color:#FFD700"></i> MCM Honorable Mention</div>
+            <div class="honor-item"><i class="fas fa-trophy" style="color:#FFD700"></i> Gold Award &mdash; Innovation Competition</div>
           </div>
         </div>
       </section>
 
       <section id="skills" class="section">
-        <div class="section-header" onclick="toggle(this)">
-          <i class="fas fa-tools"></i>
-          <span class="label">专业技能</span>
-          <span class="arrow open">&#9654;</span>
-        </div>
+        <h1 class="sh-skill" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128736;&#65039; Skills </h1>
         <div class="section-body">
           <div class="skills-grid">
             <div class="skill-group">
-              <h4><i class="fas fa-code"></i> 编程软件</h4>
+              <h4><i class="fas fa-code"></i> Programming</h4>
               <span class="skill-pill pill-lang">Python</span>
               <span class="skill-pill pill-lang">Matlab</span>
               <span class="skill-pill pill-lang">R</span>
               <span class="skill-pill pill-lang">Stata</span>
             </div>
             <div class="skill-group">
-              <h4><i class="fas fa-globe"></i> GIS 软件</h4>
+              <h4><i class="fas fa-globe"></i> GIS</h4>
               <span class="skill-pill pill-data">ArcGIS</span>
               <span class="skill-pill pill-data">Google Earth</span>
               <span class="skill-pill pill-data">ENVI</span>
             </div>
             <div class="skill-group">
-              <h4><i class="fas fa-cube"></i> 专业软件</h4>
+              <h4><i class="fas fa-cube"></i> Tools</h4>
               <span class="skill-pill pill-tool">AutoCAD</span>
               <span class="skill-pill pill-tool">Photoshop</span>
               <span class="skill-pill pill-tool">Gabi</span>
               <span class="skill-pill pill-tool">Leap</span>
             </div>
             <div class="skill-group">
-              <h4><i class="fas fa-file-alt"></i> 排版软件</h4>
+              <h4><i class="fas fa-file-alt"></i> Typesetting</h4>
               <span class="skill-pill pill-web">Word</span>
               <span class="skill-pill pill-web">TeX</span>
             </div>
             <div class="skill-group">
-              <h4><i class="fas fa-language"></i> 语言技能</h4>
-              <span class="skill-pill pill-lge">CET4（558）</span>
-              <span class="skill-pill pill-lge">CET6（515）</span>
+              <h4><i class="fas fa-language"></i> Languages</h4>
+              <span class="skill-pill pill-lge">CET-4 (558)</span>
+              <span class="skill-pill pill-lge">CET-6 (515)</span>
             </div>
           </div>
         </div>
       </section>
 
       <section id="courses" class="section">
-        <div class="section-header" onclick="toggle(this)">
-          <i class="fas fa-book"></i>
-          <span class="label">主要课程</span>
-          <span class="arrow open">&#9654;</span>
-        </div>
+        <h1 class="sh-course" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128218; Selected Coursework </h1>
         <div class="section-body">
           <div class="course-tags">
-            <span class="course-tag">微积分II-2（93）</span>
-            <span class="course-tag">大学物理B（100）</span>
-            <span class="course-tag">地理信息系统概论（96）</span>
-            <span class="course-tag">工程流体力学（92）</span>
-            <span class="course-tag">AutoCAD 与计算机绘图（91）</span>
-            <span class="course-tag">ArcGIS 软件实践与操作（94）</span>
-            <span class="course-tag">C 程序设计基础（96）</span>
-            <span class="course-tag">生态环境大数据分析（91）</span>
-            <span class="course-tag">计算数据分析（84）</span>
-            <span class="course-tag">经济学原理（87）</span>
-            <span class="course-tag">公共经济学（86）</span>
-            <span class="course-tag">离散数学（89）</span>
-            <span class="course-tag">数据挖掘（89）</span>
-            <span class="course-tag">神经网络设计（89）</span>
+            <span class="course-tag">Calculus II-2 (93)</span>
+            <span class="course-tag">Physics B (100)</span>
+            <span class="course-tag">GIS (96)</span>
+            <span class="course-tag">Fluid Mechanics (92)</span>
+            <span class="course-tag">AutoCAD &amp; Drawing (91)</span>
+            <span class="course-tag">ArcGIS Practice (94)</span>
+            <span class="course-tag">C Programming (96)</span>
+            <span class="course-tag">Eco-Data Analysis (91)</span>
+            <span class="course-tag">Computational Data Analysis (84)</span>
+            <span class="course-tag">Economics (87)</span>
+            <span class="course-tag">Public Economics (86)</span>
+            <span class="course-tag">Discrete Math (89)</span>
+            <span class="course-tag">Data Mining (89)</span>
+            <span class="course-tag">Neural Network Design (89)</span>
           </div>
         </div>
       </section>
 
-      <section id="evaluation" class="section">
-        <div class="section-header" onclick="toggle(this)">
-          <i class="fas fa-heart"></i>
-          <span class="label">自我评价</span>
-          <span class="arrow open">&#9654;</span>
-        </div>
-        <div class="section-body">
-          <div class="eval-list">
-            <div class="eval-item"><i class="fas fa-smile"></i> 友善真诚，做事细致专注</div>
-            <div class="eval-item"><i class="fas fa-shield-alt"></i> 责任心较强</div>
-            <div class="eval-item"><i class="fas fa-graduation-cap"></i> 学习能力好，擅长自学</div>
-            <div class="eval-item"><i class="fas fa-search"></i> 对感兴趣的问题深入钻研</div>
-            <div class="eval-item"><i class="fas fa-lightbulb"></i> 敢于创新，动手能力强</div>
-            <div class="eval-item"><i class="fas fa-running"></i> 勇于实践想法</div>
-            <div class="eval-item"><i class="fas fa-dumbbell"></i> 热爱运动，坚持锻炼</div>
-            <div class="eval-item"><i class="fas fa-music"></i> 爱好音乐，陶冶情操</div>
-          </div>
-        </div>
-      </section>
 
     </main>
   </div>
 
-  <footer class="site-footer">Last updated: 2026-06-28</footer>
+  <footer class="site-footer">Last updated: 2026-06-29</footer>
   <button id="backToTop">&#9650;</button>
 
   <script>
-    function toggle(h) {
-      var b = h.nextElementSibling;
-      var a = h.querySelector('.arrow');
-      if (b.classList.contains('hidden')) { b.classList.remove('hidden'); a.classList.add('open'); }
-      else { b.classList.add('hidden'); a.classList.remove('open'); }
+    function toggleSection(toggle) {
+      var body = toggle.nextElementSibling;
+      if (body && body.classList.contains('section-body')) {
+        body.classList.toggle('hidden');
+        toggle.classList.toggle('open');
+      }
     }
     (function(){
       var btn = document.getElementById('backToTop');
@@ -412,6 +517,17 @@
       });
       btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
     })();
-  </script>
+  
+    </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
