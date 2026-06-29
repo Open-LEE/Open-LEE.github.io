@@ -4,8 +4,7 @@ A bilingual personal homepage hosted on GitHub Pages.
 
 ## Contents
 
-- `index.html` — Chinese version
-- `index_en.html` — English version
+- `index.html` — English version
 - `images/lijiajie.jpg` — Profile photo
 
 ## Usage
