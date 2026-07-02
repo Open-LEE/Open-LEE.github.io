@@ -83,8 +83,8 @@
     .section-body.hidden { display: none; }
 
     .section h1 {
-      margin: 0; padding: 14px 20px;
-      font-size: 1.25em; font-weight: 700;
+      margin: 0; padding: 8px 16px;
+      font-size: 1.05em; font-weight: 700;
       cursor: pointer; user-select: none;
       display: flex; align-items: center; gap: 8px;
       color: var(--text); border-bottom: 1px solid var(--border);
@@ -103,6 +103,7 @@
     .section .sh-edu .toggle-arrow { color: #4CAF50; }
     .section .sh-project .toggle-arrow { color: #FF9800; }
     .section .sh-honor .toggle-arrow { color: #FBC02D; }
+    #academic-honors .bullet-marker, #competition-awards .bullet-marker { color: #FBC02D; }
     .section .sh-skill .toggle-arrow { color: #00796B; }
     .section .sh-course .toggle-arrow { color: #3949AB; }
     .section-count {
@@ -111,11 +112,12 @@
       display: inline-flex; align-items: center; justify-content: center;
       border-radius: 50%; color: #fff;
     }
-    #research .research-block:hover { background: #FBF5FB; border-color: #E1BEE7; }
+    #research .research-block:hover { background: #3D5A80; border-color: #5B7DB1; }
     #education .edu-item:hover { background: #F5FBF0; border-radius: 8px; }
-    #projects .timeline-item:hover { background: #FFFBF0; border-radius: 6px; }
+    #projects .edu-item:hover { background: #FFF6E8; border-radius: 8px; }
     #honors .honor-item:hover { background: #FFFDF5; }
-    #skills .skill-group:hover { background: #F0FAF0; border-radius: 8px; padding: 4px 8px; margin: -4px -8px; }
+    #academic-honors .edu-item:hover, #competition-awards .edu-item:hover { background: #FFFAED; border-radius: 8px; }
+    #skills .skill-group:hover { background: #F0FAF0; border-radius: 8px; }
     #courses .course-tag:hover { background: #F5F5FF; }
 
     .sh-about { background: #E3F2FD; }
@@ -147,14 +149,16 @@
     .tag { display: inline-block; font-size: 0.72em; font-weight: 600; padding: 2px 9px; border-radius: 12px; margin-left: 4px; vertical-align: middle; }
     .tag-blue { background: #E3F2FD; color: #1565C0; } .tag-orange { background: #FFF3E0; color: #E65100; } .tag-green { background: #E8F5E9; color: #2E7D32; } .tag-purple { background: #F3E5F5; color: #7B1FA2; } .tag-red { background: #FFEBEE; color: #C62828; }
     .research-list {
-      display: flex; flex-direction: column; gap: 8px;
+      display: flex; flex-wrap: wrap; gap: 8px;
     }
     .research-block {
-      padding: 12px 16px; border-radius: 8px;
-      font-size: 0.92em; font-weight: 500;
-      display: flex; align-items: center; gap: 12px;
-      background: #f8f9fa; border: 1px solid var(--border);
-      transition: background 0.2s;
+      padding: 8px 16px; border-radius: 6px;
+      font-size: 0.85em; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #2C3E6B;
+      color: #E0ECFF;
+      border: 1px solid #4A6FA5;
+      transition: all 0.3s ease;
     }
 
 
@@ -166,8 +170,8 @@
       flex-shrink: 0; width: 70px;
     }
     .edu-logo img {
-      width: 70px; height: 70px;
-      object-fit: cover; border-radius: 10px;
+      width: 70px;
+      object-fit: contain; border-radius: 10px;
       border: 2px solid #fff;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
@@ -273,6 +277,82 @@
     .sh-research-sub2 .subsec-icon { background: #5E35B1; }
     .sh-research-sub3 .subsec-icon { background: #C62828; }
     .subsec-body p { font-size: 0.88em; color: var(--text-light); line-height: 1.6; margin: 0; }
+
+    .section-label {
+      padding: 10px 20px 8px;
+      font-size: 1.15em; font-weight: 700;
+      color: var(--text); letter-spacing: 0.5px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 6px;
+    }
+    .sh-about { background: #E3F2FD; }
+    .sh-research { background: #F3E5F5; }
+    .sh-edu { background: #E8F5E9; }
+    .sh-project { background: #FFF3E0; }
+    .sh-honor { background: #FFF8E1; }
+    .sh-skill { background: #E0F2F1; }
+    .sh-course { background: #E8EAF6; }
+    .sh-publication { background: #FFEBEE; }
+    .pub-title-link { color: inherit; text-decoration: none; }
+    .pub-item { display: flex; gap: 20px; align-items: flex-start; padding: 6px 0; }
+    .pub-img { flex-shrink: 0; width: 200px; }
+    .pub-img img { width: 200px; border-radius: 6px; border: 1px solid var(--border); }
+    .pub-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .pub-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .pub-tag { font-size: 0.72em; padding: 2px 10px; border-radius: 12px; background: #FFF3E0; color: #E65100; }
+    .pub-title { font-size: 1em; font-weight: 700; }
+    .pub-authors { font-size: 0.85em; color: var(--text-light); }
+    .pub-venue { font-size: 0.85em; color: var(--text-muted); }
+    .pub-abstract { font-size: 0.85em; color: var(--text-light); }
+    .edu-item { display: flex; gap: 16px; align-items: flex-start; padding: 8px 0; }
+    .edu-logo { flex-shrink: 0; width: 60px; }
+    .edu-logo img { width: 60px; border-radius: 4px; }
+    .edu-info { flex: 1; }
+    .edu-school { font-size: 1.05em; font-weight: 700; margin-bottom: 2px; }
+    .edu-school em { font-weight: 400; }
+    #academic-honors .edu-school, #competition-awards .edu-school { font-size: 0.92em; }
+    .edu-major { font-size: 0.92em; color: var(--text-light); font-style: italic; }
+    .edu-location { font-size: 0.88em; color: var(--text-muted); }
+    .edu-bullets { margin-top: 4px; }
+    .edu-bullet { display: flex; gap: 6px; align-items: baseline; margin-bottom: 3px; font-size: 0.88em; color: var(--text-light); }
+    .bullet-marker { color: var(--primary); font-size: 1.15em; }
+    #projects .bullet-marker { color: #FF9800; }
+    
+    
+    .edu-divider { height: 1px; background: var(--border); margin: 6px 0; }
+    .research-link { color: #1976D2; text-decoration: none; }
+    .research-link:hover { text-decoration: underline; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .skill-pill { font-size: 0.82em; font-weight: 500; padding: 3px 12px; border-radius: 14px; display: inline-block; }
+    .skill-pill:hover { filter: brightness(0.85); }
+    .pill-lang { background: #E3F2FD; color: #1565C0; }
+    .pill-dl { background: #FCE4EC; color: #C62828; }
+    .pill-da { background: #E0F7FA; color: #00695C; }
+    .pill-web { background: #FFF3E0; color: #E65100; }
+    .pill-tool { background: #ECEFF1; color: #37474F; }
+    .pill-lge { background: #E8EAF6; color: #283593; }
+    .pill-data { background: #E8F5E9; color: #2E7D32; }
+    #skills .skills-grid { display: flex; flex-direction: column; gap: 14px; }
+    #skills .skill-group { padding: 4px 0; }
+    #skills .skill-group:hover { background: #F0FAF0; border-radius: 8px; }
+    #skills .skill-group h4 { font-size: 0.9em; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    #skills .skill-group h4 i { font-size: 1.1em; }
+    #skills .skill-group h4 i.fa-code { color: #1976D2; }
+    #skills .skill-group h4 i.fa-globe { color: #388E3C; }
+    #skills .skill-group h4 i.fa-cube { color: #F57C00; }
+    #skills .skill-group h4 i.fa-language { color: #00796B; }
+    #skills .skill-group h4 i.fa-brain { color: #E91E63; }
+    #skills .skill-group h4 i.fa-chart-bar { color: #00BCD4; }
+    #skills .skill-group h4 i.fa-laptop-code { color: #FF5722; }
+    #skills .skill-group h4 i.fa-cogs { color: #607D8B; }
+    #ideas .edu-item:hover { background: #E8F0FE; border-radius: 8px; }
+    #ideas .edu-school { font-size: 0.95em; }
+    #connect .section-body > div > div:hover { background: #E8F0FE; border-radius: 8px; padding: 4px 8px; margin: -4px -8px; }
+    .hobby-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .hobby-item { padding: 12px 14px; border-radius: 10px; background: #FAFAFF; border: 1px solid #eee; }
+    #courses .hobby-item:hover { background: #EBEBFF; }
+    #publications .pub-item:hover { background: #FFF0F2; border-radius: 8px; }
+
 </style>
 </head>
 <body>
@@ -281,14 +361,14 @@
     <div class="masthead__inner">
       <span class="masthead__brand">Homepage</span>
       <ul class="nav-links">
-        <li><a href="#about">About Me</a></li>
+        <li><a href="#about">About</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#education">Education</a></li>
-        <li><a href="#projects">Project
-s</a></li>
-        <li><a href="#honors">Honors</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#honors-awards">Honors</a></li>
+        <li><a href="#publications">Publications</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#courses">Courses</a></li>
+        <li><a href="#courses">Hobbies</a></li>
       </ul>
     </div>
   </header>
@@ -304,25 +384,27 @@ s</a></li>
           <li><i class="fas fa-map-marker-alt"></i> Wuhan</li>
           <li><a href="mailto:2023102130028@whu.edu.cn"><i class="fas fa-envelope"></i> Email</a></li>
           <li><a href="https://github.com/Open-LEE" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+          <li><a href="https://scholar.google.com/citations?hl=en&amp;user=ocxtrhsAAAAJ&amp;view_op=list_works&amp;gmla=ACrTK9XjklJjCfMvxqtmTgQHdE8C-3pkF7aDse4_Jy46PImZJAAr9hwH3vgtyMztdnENq148-nsS81O1Tsx0WitHBZOhqC01RQ-QcRuI5VAxwKPKW2ZP8fgXmwSyC00vEXLsQiD1" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a></li>
+          <li><a href="https://orcid.org/0009-0006-3396-3956" target="_blank"><i class="fab fa-orcid"></i> ORCID</a></li>
         </ul>
       </div>
     </aside>
 
     <main class="main">
 
+      <div class="section-label">📖 About Me</div>
       <section id="about" class="section">
-        <h1 class="sh-about" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128214; About Me </h1>
-        <div class="section-body">
+        <div class="section-body" style="border-top: none;">
           <div class="about-text">
-            <p>&#127891; I am Jiajie Li, a PhD candidate based in Wuhan, with research focusing on computer vision and spatiotemporal image processing. I specialize in image spatiotemporal reconstruction, conducting algorithm research on core vision tasks including image inpainting and resolution enhancement. I am currently developing a unified research framework that integrates spatial features, temporal dependencies, and multi-source data. With solid hands-on experience in image processing and deep learning implementation, I hold a strong passion for exploring cutting-edge advances in computer vision.</p>
-            <p>&#127793; Coming from an interdisciplinary background in environmental ecology, remote sensing, and mathematical statistics, I have long been enthusiastic about cross-domain integration research in computer vision. My research journey began with spatial data analysis and temporal modeling practices. Starting from traditional image processing and statistical analysis methods, I have progressively delved into deep learning-driven image reconstruction and multi-source information fusion. This cross-disciplinary growth has laid a solid mathematical foundation for me, and fostered my mindset of approaching vision problems from real-world scenarios. I highly value every opportunity for technical exploration and collaborative research.</p>
-            <p>&#128187; I always believe in the power of continuous learning and sincere collaboration. Outside of research, I enjoy sports and music to stay energized. I keep a sustained focus and strong curiosity for frontier directions including image and video processing and multimodal large models. I am open to exchanging technical insights and sharing practical experience, and look forward to collaborating with peers from diverse backgrounds. Feel free to reach out to me anytime .it would be my great pleasure to have academic discussions, technical exchanges, or project cooperation with you.</p>
+            <p>&#127891; I am Jiajie Li, a PhD candidate based in Wuhan, focusing on <span style="color: #0D47A1; font-weight: 600;">computer vision and spatiotemporal image processing</span>. My research interests include image reconstruction, inpainting, super-resolution, and multi-source data fusion. I am currently developing unified vision frameworks that integrate spatial, temporal, and multimodal information, with a strong interest in deep learning and practical computer vision applications.</p>
+            <p>&#127793; With an interdisciplinary background in <span style="color: #0D47A1; font-weight: 600;">environmental ecology, remote sensing, and mathematical statistics</span>, I have developed a strong foundation in spatial analysis and temporal modeling. My research has evolved from traditional image processing and statistical methods to deep learning-based image reconstruction and multimodal fusion, enabling me to approach vision problems from both theoretical and real-world perspectives.</p>
+            <p>&#128187; I enjoy exploring emerging topics in <span style="color: #0D47A1; font-weight: 600;">computer vision, image and video processing, and multimodal large models</span>. I value continuous learning, open collaboration, and technical exchange. Feel free to reach out if you are interested in academic discussions, research collaboration, or related projects.</p>
           </div>
         </div>
       </section>
+      <div class="section-label">🔬 Research Areas</div>
       <section id="research" class="section">
-        <h1 class="sh-research" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128300; Research Areas </h1>
-        <div class="section-body">
+        <div class="section-body" style="border-top: none;">
           <div class="research-list">
             <div class="research-block">
               <span class="research-icon">&#129504;</span>
@@ -339,8 +421,9 @@ s</a></li>
           </div>
         </div>
       </section>
-<section id="education" class="section">
-        <h1 class="sh-edu" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#127891; Education <span class="section-count" style="background:#4CAF50;">2</span></h1>
+<div class="section-label">🎓 Education</div>
+      <section id="education" class="section">
+        <h1 class="sh-edu" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#127891; Academic Background <span class="section-count" style="background:#4CAF50;">2</span></h1>
         <div class="section-body">
           <div class="edu-item">
             <div class="edu-logo">
@@ -348,7 +431,7 @@ s</a></li>
             </div>
             <div class="edu-info">
               <div class="edu-school">Wuhan University</div>
-              <div class="edu-major">Ph.D. in Photogrammetry &amp; Remote Sensing</div>
+              <div class="edu-major">Ph.D. in Remote Sensing</div>
               <div class="edu-location">&#128205; Wuhan &middot; Sept 2023 &ndash; Present</div>
             </div>
           </div>
@@ -364,142 +447,300 @@ s</a></li>
             </div>
           </div>
         </div>
-      </section><section id="projects" class="section">
-        <h1 class="sh-project" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128187; Projects <span class="section-count" style="background:#FF9800;">6</span></h1>
+      </section><div class="section-label">💼 Professional Experience</div>
+      <section id="projects" class="section">
+        <h1 class="sh-project" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128187; Research Experience <span class="section-count" style="background:#FF9800;">3</span></h1>
         <div class="section-body">
-          <div class="timeline-item">
-            <div class="timeline-date">2020.06&ndash;2021.12</div>
-            <div class="timeline-body">
-              <h3>Innovation Program <span class="tag tag-blue">Lead</span></h3>
-              <div class="meta">Xiamen University</div>
-              <p>Led project planning, execution, and team coordination.</p>
+          <div class="edu-item">
+            <div class="edu-logo">
+              <img src="images/Datawhale.png" alt="Datawhale">
+            </div>
+            <div class="edu-info">
+              <div class="edu-school"><a href="https://www.datawhale.cn/" target="_blank" class="research-link">Datawhale</a></div>
+              <div class="edu-major">Outstanding Teaching Assistant, <a href="prove/datawhale-awards/outstanding-learner.png" target="_blank" class="research-link">Outstanding Learner</a></div>
+              <div class="edu-location">&#128205; Online &amp; Offline &middot; 2023 &ndash; Present</div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">&#8226;</span> <span class="bullet-text">Participated in multiple AI-themed team learning courses organized by Datawhale.</span></div>
+              </div>
             </div>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-date green">2020&ndash;2021</div>
-            <div class="timeline-body">
-              <h3>Land-Sea Coastal Landscape Connectivity Modeling</h3>
-              <div class="meta">Project No. 2020X855</div>
-              <p>Constructed spatial ecological networks based on landscape connectivity theory. Performed core area clustering and habitat resistance prediction.</p>
+          <div class="edu-divider"></div>
+          <div class="edu-item">
+            <div class="edu-logo">
+              <img src="images/xmu_logo.jpeg" alt="XMU">
+            </div>
+            <div class="edu-info">
+              <div class="edu-school"><a href="https://github.com/wise-r" target="_blank" class="research-link">Xiamen University WISER Club</a></div>
+              <div class="edu-major"><a href="prove/wiser-club/wiser_club.png" target="_blank" class="research-link">Insider</a>, Machine Learning Group</div>
+              <div class="edu-location">&#128205; Xiamen &middot; Aug 2022 &ndash; July 2023</div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">&#8226;</span> <span class="bullet-text">Participated in multiple academic seminars and in-depth discussions on deep learning algorithms.</span></div>
+                <div class="edu-bullet"><span class="bullet-marker">&#8226;</span> <span class="bullet-text">Participated in curriculum design and delivered lectures on machine learning and reinforcement learning algorithms.</span></div>
+              </div>
             </div>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-date orange">2021.07</div>
-            <div class="timeline-body">
-              <h3>Ocean Cloud &mdash; Remote Sensing Service Platform</h3>
-              <div class="meta">7th XMU Innovation Competition <span class="tag tag-orange">Gold Award</span></div>
-              <p>Leveraged cloud processing and remote sensing algorithms for data calibration, water extraction, and vegetation classification.</p>
+          <div class="edu-divider"></div>
+          <div class="edu-item">
+            <div class="edu-logo">
+              <img src="images/xmu_logo.jpeg" alt="XMU">
             </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date green">2021.09</div>
-            <div class="timeline-body">
-              <h3>Multi-Objective Ordering &amp; Transport Strategy</h3>
-              <div class="meta">China Collegiate Math Contest <span class="tag tag-green">Fujian 1st Prize</span></div>
-              <p>Used simulated annealing and multi-objective programming. LSTM for capacity forecasting.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date purple">2022.02</div>
-            <div class="timeline-body">
-              <h3>Forward or Backward: Investment Strategy of Volatile Assets</h3>
-              <div class="meta">MCM <span class="tag tag-purple">Honorable Mention</span></div>
-              <p>Employed SA and LSTM for investment strategies. Validated via Monte Carlo methods.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date red">2021.05</div>
-            <div class="timeline-body">
-              <h3>BIPV Stock Index Trend Analysis &amp; Forecasting</h3>
-              <div class="meta">13th CSEE Cup Math Contest <span class="tag tag-red">National 1st Prize</span></div>
-              <p>Forecasted stock indices using ARIMA, LSTM. TOPSIS for investment optimization.</p>
+            <div class="edu-info">
+              <div class="edu-school"><a href="https://www.bilibili.com/video/BV1xD4y1B7Pj/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=7963c350962c106b2634f61b9b7c43e5" target="_blank" class="research-link">Xiamen University Maritime Silk Program</a></div>
+              <div class="edu-major">Conducted scientific practice in the South China Sea</div>
+              <div class="edu-location">&#128205; Xiamen &ndash; South China Sea &middot; Aug 2022</div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">&#8226;</span> <span class="bullet-text">Participated in a multidisciplinary marine scientific expedition aboard the research vessel Jiageng, focusing on marine environmental monitoring and data collection.</span></div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="honors" class="section">
-        <h1 class="sh-honor" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#127942; Honors &amp; Awards </h1>
+      <div class="section-label" style="color:var(--text);">📖 Selected Publications</div>
+      <section id="publications" class="section" style="scroll-margin-top: 90px;">
+        <h1 class="sh-publication" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> 📄 Object Detection <span class="section-count" style="background:#E65100;">1</span></h1>
         <div class="section-body">
-          <div class="honor-grid">
-            <div class="honor-item"><i class="fas fa-award"></i> Wang Shujing &amp; Wang Wendou Scholarship</div>
-            <div class="honor-item"><i class="fas fa-award"></i> Standard &amp; Far East Scholarship</div>
-            <div class="honor-item"><i class="fas fa-medal"></i> Outstanding League Secretary</div>
-            <div class="honor-item"><i class="fas fa-medal"></i> Outstanding Student Leader</div>
-            <div class="honor-item"><i class="fas fa-medal"></i> Merit Student</div>
-            <div class="honor-item"><i class="fas fa-trophy" style="color:#FFD700"></i> National 1st Prize &mdash; Math Modeling</div>
-            <div class="honor-item"><i class="fas fa-trophy" style="color:#FFD700"></i> MCM Honorable Mention</div>
-            <div class="honor-item"><i class="fas fa-trophy" style="color:#FFD700"></i> Gold Award &mdash; Innovation Competition</div>
+          <div class="pub-item">
+            <div class="pub-img">
+              <img src="article/RSL2026.jpg" alt="Paper">
+            </div>
+            <div class="pub-info">
+              <div class="pub-tags"><span class="pub-tag">Macroalgae Detection</span><span class="pub-tag">Deep Learning</span></div>
+              <div class="pub-title"><a href="https://doi.org/10.1080/2150704X.2026.2629348" target="_blank" class="pub-title-link">A novel weighted loss function for improved deep learning-based detection of floating macroalgae blooms in multispectral imagery</a></div>
+              <div class="pub-authors">Mingqing Liu, Yichao Zou, <strong>Jiajie Li</strong>, Yue Sun, Zhongbin B. Li &amp; Mengqiu Wang</div>
+              <div class="pub-venue"><em>Remote Sensing Letters</em>, 2026, 17:3, 336-346</div>
+              <div class="pub-abstract">A novel weighted loss function that mitigates class imbalance and improves discrimination against spectrally similar noise, significantly enhancing deep learning-based detection of floating macroalgae in multispectral remote sensing imagery.</div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section id="skills" class="section">
-        <h1 class="sh-skill" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128736;&#65039; Skills </h1>
+      <div id="honors-awards" style="scroll-margin-top: 90px;"></div>
+      <div class="section-label">🥇 Honors and Awards</div>
+
+      <section id="academic-honors" class="section" style="scroll-margin-top: 90px;">
+        <h1 class="sh-honor" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> 🎓 Academic Honors <span class="section-count" style="background:#FBC02D;">1</span></h1>
+        <div class="section-body">
+          <div class="edu-item">
+            <div class="edu-info">
+              <div class="edu-school">[1] <a href="prove/academic-honors/w_w_scholarship.png" target="_blank" class="research-link">Wang Shujing &amp; Wang Wendou Scholarship</a> <em>(January 2022)</em></div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Level: City-level</span></div>
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Achievement: Recognized for outstanding academic performance</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="competition-awards" class="section" style="scroll-margin-top: 90px;">
+        <h1 class="sh-honor" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> 🏆 Competition Awards <span class="section-count" style="background:#FBC02D;">6</span></h1>
+        <div class="section-body">
+          <div class="edu-item">
+            <div class="edu-info">
+              <div class="edu-school">[1] <a href="prove/competition-awards/2022-mcm-h.pdf" target="_blank" class="research-link">Mathematical Contest In Modeling (MCM), Honorable Mention <i class="fas fa-file-pdf" style="color: #E53935; font-size: 0.85em;"></i></a> <em>(February 2022)</em></div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Level: International Competition</span></div>
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Region: United States</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="edu-divider"></div>
+          <div class="edu-item">
+            <div class="edu-info">
+              <div class="edu-school">[2] <a href="prove/competition-awards/2021-national-math-fujian-first.pdf" target="_blank" class="research-link">Higher Education Cup National Mathematical Modeling Competition, Fujian First Prize <i class="fas fa-file-pdf" style="color: #E53935; font-size: 0.85em;"></i></a> <em>(September 2021)</em></div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Level: Provincial Competition</span></div>
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Region: Fujian Province</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="edu-divider"></div>
+          <div class="edu-item">
+            <div class="edu-info">
+              <div class="edu-school">[3] <a href="prove/competition-awards/7th-xmu-internet-plus-gold.pdf" target="_blank" class="research-link">Xiamen University "Internet+" Innovation and Entrepreneurship Competition, Gold Award <i class="fas fa-file-pdf" style="color: #E53935; font-size: 0.85em;"></i></a> <em>(July 2021)</em></div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Level: University Competition</span></div>
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Region: Fujian Province</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="edu-divider"></div>
+          <div class="edu-item">
+            <div class="edu-info">
+              <div class="edu-school">[4] <a href="prove/competition-awards/13th-csee-cup-first.pdf" target="_blank" class="research-link">"CSEE Cup" Mathematical Modeling Competition, National First Prize <i class="fas fa-file-pdf" style="color: #E53935; font-size: 0.85em;"></i></a> <em>(May 2021)</em></div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Level: National Competition</span></div>
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Region: China</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="edu-divider"></div>
+          <div class="edu-item">
+            <div class="edu-info">
+              <div class="edu-school">[5] <a href="prove/competition-awards/xmu-physics-15th-third.pdf" target="_blank" class="research-link">Xiamen University 15th Physics Competition, Third Place <i class="fas fa-file-pdf" style="color: #E53935; font-size: 0.85em;"></i></a> <em>(May 2021)</em></div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Level: University Competition</span></div>
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Region: Fujian Province</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="edu-divider"></div>
+          <div class="edu-item">
+            <div class="edu-info">
+              <div class="edu-school">[6] <a href="https://www.noi.cn/ccf/file/do?fid=G8hDM5yB&attach=n" target="_blank" class="research-link">NOIP 2014 National Youth Informatics Olympiad League <i class="fas fa-external-link-alt" style="color: #1976D2; font-size: 0.85em;"></i></a> <em>(2014)</em></div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Level: National Competition</span></div>
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">Region: China</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-label">🔮 Skills &amp; Ideas</div>
+
+      <section id="skills" class="section" style="scroll-margin-top: 90px;">
+        <h1 class="sh-skill" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> 💻 Skills </h1>
         <div class="section-body">
           <div class="skills-grid">
             <div class="skill-group">
               <h4><i class="fas fa-code"></i> Programming</h4>
+              <div class="skill-pills">
               <span class="skill-pill pill-lang">Python</span>
               <span class="skill-pill pill-lang">Matlab</span>
               <span class="skill-pill pill-lang">R</span>
               <span class="skill-pill pill-lang">Stata</span>
+              <span class="skill-pill pill-lang">C</span>
+              <span class="skill-pill pill-lang">C++</span>
+              <span class="skill-pill pill-lang">Mathematica</span>
+              <span class="skill-pill pill-lang">LaTeX</span>
+              <span class="skill-pill pill-lang">Linux</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4><i class="fas fa-brain"></i> Deep Learning</h4>
+              <div class="skill-pills">
+              <span class="skill-pill pill-dl">PyTorch</span>
+              <span class="skill-pill pill-dl">TensorFlow</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4><i class="fas fa-chart-bar"></i> Data &amp; Analysis</h4>
+              <div class="skill-pills">
+              <span class="skill-pill pill-da">Pandas</span>
+              <span class="skill-pill pill-da">NumPy</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4><i class="fas fa-laptop-code"></i> Web Development</h4>
+              <div class="skill-pills">
+              <span class="skill-pill pill-web">HTML</span>
+              <span class="skill-pill pill-web">JavaScript</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <h4><i class="fas fa-cogs"></i> Tools &amp; Infrastructure</h4>
+              <div class="skill-pills">
+              <span class="skill-pill pill-tool">Git</span>
+              <span class="skill-pill pill-tool">CUDA</span>
+              </div>
             </div>
             <div class="skill-group">
               <h4><i class="fas fa-globe"></i> GIS</h4>
+              <div class="skill-pills">
               <span class="skill-pill pill-data">ArcGIS</span>
-              <span class="skill-pill pill-data">Google Earth</span>
+              <span class="skill-pill pill-data">Google Earth Engine</span>
               <span class="skill-pill pill-data">ENVI</span>
+              </div>
             </div>
             <div class="skill-group">
               <h4><i class="fas fa-cube"></i> Tools</h4>
+              <div class="skill-pills">
               <span class="skill-pill pill-tool">AutoCAD</span>
-              <span class="skill-pill pill-tool">Photoshop</span>
+              <span class="skill-pill pill-tool">PS</span>
+              <span class="skill-pill pill-tool">PR</span>
               <span class="skill-pill pill-tool">Gabi</span>
               <span class="skill-pill pill-tool">Leap</span>
-            </div>
-            <div class="skill-group">
-              <h4><i class="fas fa-file-alt"></i> Typesetting</h4>
-              <span class="skill-pill pill-web">Word</span>
-              <span class="skill-pill pill-web">TeX</span>
+              </div>
             </div>
             <div class="skill-group">
               <h4><i class="fas fa-language"></i> Languages</h4>
-              <span class="skill-pill pill-lge">CET-4 (558)</span>
-              <span class="skill-pill pill-lge">CET-6 (515)</span>
+              <div class="skill-pills">
+              <span class="skill-pill pill-lge">English (CET-6, IELTS)</span>
+              <span class="skill-pill pill-lge">Chinese (Native)</span>
+              <span class="skill-pill pill-lge">Malay (Beginner)</span>
+              <span class="skill-pill pill-lge">Japanese (Studying)</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="courses" class="section">
-        <h1 class="sh-course" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> &#128218; Selected Coursework </h1>
+      <section id="ideas" class="section" style="scroll-margin-top: 90px;">
+        <h1 class="sh-skill" onclick="toggleSection(this)"><span class="toggle-arrow">&#9654;</span> 💡 Ideas <span class="section-count" style="background:#1976D2;">2</span></h1>
         <div class="section-body">
-          <div class="course-tags">
-            <span class="course-tag">Calculus II-2 (93)</span>
-            <span class="course-tag">Physics B (100)</span>
-            <span class="course-tag">GIS (96)</span>
-            <span class="course-tag">Fluid Mechanics (92)</span>
-            <span class="course-tag">AutoCAD &amp; Drawing (91)</span>
-            <span class="course-tag">ArcGIS Practice (94)</span>
-            <span class="course-tag">C Programming (96)</span>
-            <span class="course-tag">Eco-Data Analysis (91)</span>
-            <span class="course-tag">Computational Data Analysis (84)</span>
-            <span class="course-tag">Economics (87)</span>
-            <span class="course-tag">Public Economics (86)</span>
-            <span class="course-tag">Discrete Math (89)</span>
-            <span class="course-tag">Data Mining (89)</span>
-            <span class="course-tag">Neural Network Design (89)</span>
+          <div class="edu-item">
+            <div class="edu-info">
+              <div class="edu-school"><span style="font-weight: 700; margin-right: 6px;">[1]</span><i class="fab fa-github" style="color: var(--primary); font-size: 0.85em; line-height: 1; vertical-align: middle; margin-right: 4px;"></i> <a href="https://github.com/Open-LEE/Autosatpack" target="_blank" class="research-link">Autosatpack</a></div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">A fully automated remote sensing data download and processing script that runs on HPC clusters and servers.</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="edu-divider"></div>
+          <div class="edu-item">
+            <div class="edu-info">
+              <div class="edu-school"><span style="font-weight: 700; margin-right: 6px;">[2]</span><i class="fab fa-github" style="color: var(--primary); font-size: 0.85em; line-height: 1; vertical-align: middle; margin-right: 4px;"></i> <a href="https://github.com/Open-LEE/Texas-Calculator" target="_blank" class="research-link">Texas-Calculator</a></div>
+              <div class="edu-bullets">
+                <div class="edu-bullet"><span class="bullet-marker">•</span> <span class="bullet-text">A Texas Hold'em odds simulator that calculates real-time win rates and offers actionable tips to sharpen your poker decision-making.</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      <div class="section-label">🎮 Hobbies &amp; Interests</div>
+      <section id="courses" class="section" style="scroll-margin-top: 90px;">
+        <div class="section-body">
+          <div class="hobby-grid">
+            <div class="hobby-item"><div style="display: flex; align-items: center; gap: 8px;"><i class="fas fa-music" style="color: #E91E63; font-size: 1.4em;"></i> Music</div><div style="font-size: 0.8em; font-weight: 400; color: var(--text-light); margin-top: 4px;">I'm into singing, and I've also picked up a few instruments along the way – <a href="https://www.bilibili.com/video/BV1QA411z7gD/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=7963c350962c106b2634f61b9b7c43e5" target="_blank" class="research-link">flute</a>, kazoo, and <a href="https://www.bilibili.com/video/BV1kim8Y2Eox/?spm_id_from=333.1387.homepage.video_card.click&amp;vd_source=7963c350962c106b2634f61b9b7c43e5" target="_blank" class="research-link">piano</a>.</div></div>
+            <div class="hobby-item"><div style="display: flex; align-items: center; gap: 8px;"><i class="fas fa-running" style="color: #4CAF50; font-size: 1.4em;"></i> Sports</div><div style="font-size: 0.8em; font-weight: 400; color: var(--text-light); margin-top: 4px;">I love <a href="prove/hobby-items/running.jpg" target="_blank" class="research-link">running</a>, <a href="prove/hobby-items/marathons.jpg" target="_blank" class="research-link">marathons</a>, <a href="prove/hobby-items/football.jpg" target="_blank" class="research-link">football</a>, badminton, and table tennis – now picking up rock climbing and tennis.</div></div>
+            <div class="hobby-item"><div style="display: flex; align-items: center; gap: 8px;"><i class="fas fa-gamepad" style="color: #FF9800; font-size: 1.4em;"></i> Games</div><div style="font-size: 0.8em; font-weight: 400; color: var(--text-light); margin-top: 4px;">I love MOBA games, board games, and Switch games. Currently learning <a href="prove/hobby-items/chess.jpg" target="_blank" class="research-link">chess</a> – hit me up if you want to play together!</div></div>
+            <div class="hobby-item"><div style="display: flex; align-items: center; gap: 8px;"><i class="fas fa-hiking" style="color: #2196F3; font-size: 1.4em;"></i> Hiking &amp; Traveling</div><div style="font-size: 0.8em; font-weight: 400; color: var(--text-light); margin-top: 4px;">I've conquered trails like Mount Wugong, Mount Lu, and <a href="prove/hobby-items/maclehose-trail.jpg" target="_blank" class="research-link">the MacLehose Trail</a> – determined to keep pushing my limits and scaling greater peaks.</div></div>
+          </div>
+          <div style="font-size: 0.9em; color: var(--text-light); margin-top: 14px; line-height: 1.6; text-align: center;">Welcome friends with similar interests to connect and share life with me! 👋</div>
+        </div>
+      </section>
 
-    </main>
+      <div class="section-label" style="color: var(--text);">📬 Let's Connect</div>
+      <section id="connect" class="section" style="scroll-margin-top: 90px; background: linear-gradient(135deg, #F0F8FF 0%, #F5F0FF 50%, #F0FFF0 100%); border: 1px solid #E0E8F0; box-shadow: 0 2px 12px rgba(0,0,0,0.04);">
+        <div class="section-body" style="background: transparent;">
+          <div style="display: flex; flex-direction: column; gap: 14px; padding: 6px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.95em; color: var(--text);">
+              <i class="fas fa-envelope" style="color: #1976D2; font-size: 1.2em; width: 24px;"></i>
+              <span>Email: <a href="mailto:open_l@outlook.com" style="color: #1976D2; text-decoration: none; font-weight: 600;">open_l@outlook.com</a></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.95em; color: var(--text); line-height: 1.5;">
+              <i class="fas fa-briefcase" style="color: #1976D2; font-size: 1.2em; width: 24px;"></i>
+              <span>I'm eager to connect with fellow deep learning enthusiasts and researchers passionate about advancing AI.</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.95em; color: var(--text);">
+              <i class="fas fa-map-marker-alt" style="color: #1976D2; font-size: 1.2em; width: 24px;"></i>
+              <span>Wuhan, China</span>
+            </div>
+          </div>
+        </div>
+      </section>
+</main>
   </div>
 
-  <footer class="site-footer">Last updated: 2026-06-29</footer>
+  <footer class="site-footer"><span id="lastUpdated"></span></footer>
   <button id="backToTop">&#9650;</button>
+
+    <script>
+    document.getElementById("lastUpdated").textContent = "Last updated: 2026-07-02 00:26:07";
+  </script>
 
   <script>
     function toggleSection(toggle) {
