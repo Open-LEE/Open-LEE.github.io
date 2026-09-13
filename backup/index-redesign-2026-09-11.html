@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jiajie Li · Homepage</title>
+  <meta name="description" content="Jiajie Li - Personal Homepage">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1976D2;
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-2: #475569;
+      --text-3: #8b95a7;
+      --line: #e9edf5;
+      --radius: 16px;
+      --nav-h: 60px;
+      --shadow-1: 0 1px 2px rgba(15,23,42,0.04), 0 10px 24px rgba(15,23,42,0.05);
+      --shadow-2: 0 2px 8px rgba(15,23,42,0.06), 0 18px 40px rgba(15,23,42,0.10);
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+              Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      line-height: 1.72;
+      padding-top: var(--nav-h);
+      -webkit-font-smoothing: antialiased;
+      background:
+        radial-gradient(1100px 520px at 8% -8%, #e8f1ff 0%, rgba(232,241,255,0) 62%),
+        radial-gradient(900px 480px at 102% -4%, #f0ecff 0%, rgba(240,236,255,0) 58%),
+        var(--bg);
+      background-attachment: fixed;
+      animation: pageIn 0.5s ease both;
+    }
+    @keyframes pageIn { from { opacity: 0; } to { opacity: 1; } }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: #d6e6ff; }
+    section[id], div[id] { scroll-margin-top: calc(var(--nav-h) + 22px); }
+
+    /* ---------- top bar ---------- */
+    .masthead {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border-bottom: 1px solid var(--line);
+      transition: box-shadow 0.25s ease;
+    }
+    .masthead.scrolled { box-shadow: 0 6px 24px rgba(15,23,42,0.06); }
+    .masthead__inner {
+      max-width: 1200px; margin: 0 auto; height: 100%;
+      display: flex; align-items: center; padding: 0 32px; gap: 32px;
+    }
+    /* 270px brand + 32px gap lines the first link up with the content column */
+    .brand {
+      width: 270px; flex: 0 0 270px; text-align: center;
+      font-weight: 700; font-size: 0.98rem; letter-spacing: 0.01em; white-space: nowrap;
+    }
+    /* one shared effect for the top bar and the overflow menu */
+    .nav-list { display: flex; align-items: center; gap: 2px; list-style: none; }
+    .nav-list li { display: flex; align-items: center; flex: 0 0 auto; }
+    .nav-list a {
+      position: relative; display: inline-flex; align-items: center;
+      padding: 7px 11px; border-radius: 10px;
+      font-size: 0.82rem; color: var(--text-3); white-space: nowrap;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+    .nav-list a::after {
+      content: ""; position: absolute; left: 11px; right: 11px; bottom: 2px;
+      height: 2px; border-radius: 2px;
+      background: var(--nav-color, var(--primary));
+      transform: scaleX(0); transition: transform 0.24s ease;
+    }
+    .nav-list a:hover, .nav-list a:focus-visible {
+      color: var(--nav-color, var(--primary)); background: #eef3fb;
+    }
+    .nav-list a:hover::after, .nav-list a:focus-visible::after { transform: scaleX(1); }
+    .nav-list a[href="#about"]         { --nav-color: #1976D2; }
+    .nav-list a[href="#research"]      { --nav-color: #7B1FA2; }
+    .nav-list a[href="#education"]     { --nav-color: #4CAF50; }
+    .nav-list a[href="#projects"]      { --nav-color: #FF9800; }
+    .nav-list a[href="#publications"]  { --nav-color: #C62828; }
+    .nav-list a[href="#honors-awards"] { --nav-color: #FBC02D; }
+    .nav-list a[href="#skills"]        { --nav-color: #00796B; }
+    .nav-list a[href="#courses"]       { --nav-color: #3949AB; }
+    .nav-list a[href="#connect"]       { --nav-color: #1976D2; }
+    .nav-links { flex: 1 1 auto; min-width: 0; height: 100%; overflow: hidden; }
+    .nav-more-wrap { position: relative; flex: 0 0 auto; display: flex; align-items: center; height: 100%; }
+    .nav-toggle {
+      display: none; background: none; border: 0; cursor: pointer;
+      color: var(--text-2); font-size: 1.05rem; line-height: 1; padding: 8px 8px; border-radius: 10px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .nav-toggle.show { display: inline-flex; align-items: center; }
+    .nav-toggle:hover { background: #eef3fb; color: var(--primary); }
+    .nav-toggle .fa-times { display: none; }
+    .nav-toggle.open .fa-bars { display: none; }
+    .nav-toggle.open .fa-times { display: inline-block; }
+    .nav-more {
+      display: none; position: absolute; top: calc(100% + 8px); right: 0;
+      flex-direction: column; gap: 0; width: max-content; min-width: 158px;
+      background: #fff; border: 1px solid var(--line); border-radius: 14px;
+      box-shadow: var(--shadow-2); padding: 6px; max-height: 70vh; overflow-y: auto;
+    }
+    .nav-more.show { display: flex; }
+    .nav-more li { width: 100%; }
+    .nav-more a { width: 100%; font-size: 0.84rem; }
+
+    /* ---------- layout ---------- */
+    .page {
+      max-width: 1200px; margin: 0 auto;
+      padding: 32px 32px 56px;
+      display: flex; gap: 32px; align-items: flex-start;
+    }
+    .sidebar { width: 270px; flex: 0 0 270px; }
+    .content { flex: 1; min-width: 0; }
+
+    .profile {
+      position: sticky; top: calc(var(--nav-h) + 20px);
+      background: linear-gradient(180deg, #f2f7ff 0%, #ffffff 48%);
+      border: 1px solid var(--line);
+      border-radius: 18px; box-shadow: var(--shadow-1);
+      padding: 26px 20px 20px; text-align: center;
+    }
+    .avatar {
+      width: 122px; height: 122px; border-radius: 50%; object-fit: cover;
+      display: block; margin: 0 auto 16px;
+      box-shadow: 0 0 0 4px #fff, 0 0 0 5px var(--line), 0 14px 30px rgba(25,118,210,0.18);
+    }
+    .profile h1 { font-size: 1.18rem; font-weight: 700; letter-spacing: -0.01em; line-height: 1.35; }
+    .profile .cn { display: block; font-size: 0.82rem; font-weight: 500; color: var(--text-3); margin-top: 3px; }
+    .role {
+      display: inline-flex; align-items: center; gap: 7px;
+      margin: 12px 0 18px; padding: 4px 13px; border-radius: 999px;
+      font-size: 0.78rem; font-weight: 650; color: var(--primary); background: #eaf3fe;
+    }
+    .role .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
+    .contact { list-style: none; display: flex; flex-direction: column; gap: 3px; text-align: left; }
+    .contact > li > a, .contact > li > span {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 10px; border-radius: 10px;
+      font-size: 0.84rem; color: var(--text-2);
+      transition: background 0.18s, color 0.18s;
+    }
+    .contact > li > a:hover { background: #f2f6fd; color: var(--primary); }
+    .contact i { width: 18px; text-align: center; color: var(--primary); font-size: 0.95rem; }
+
+    /* ---------- section cards ---------- */
+    .card {
+      position: relative;
+      background: var(--c-soft, #f5f7fb);
+      border: 1px solid rgba(15,23,42,0.05); border-radius: var(--radius);
+      box-shadow: var(--shadow-1); margin-bottom: 20px; overflow: hidden;
+      transition: box-shadow 0.25s ease;
+    }
+    .card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--c, var(--primary)), rgba(255,255,255,0) 78%);
+      opacity: 0.85;
+    }
+    .card:hover { box-shadow: var(--shadow-2); }
+    .card-head {
+      display: flex; align-items: center; gap: 12px; width: 100%;
+      padding: 15px 20px 14px; background: none; border: 0;
+      font: inherit; color: inherit; text-align: left; cursor: pointer;
+      transition: background 0.18s ease;
+    }
+    /* hovering the section header deepens the section's own colour */
+    .card-head:hover { background: var(--c-hover, rgba(15,23,42,0.075)); }
+    .card-head:hover .card-title { color: #0b1220; }
+    .card-head:hover .chev { border-color: var(--c, var(--text-2)); }
+    .card-icon {
+      width: 34px; height: 34px; flex: 0 0 34px;
+      display: grid; place-items: center; border-radius: 10px;
+      background: rgba(255,255,255,0.92); font-size: 1rem; line-height: 1;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.06);
+    }
+    .card-title { font-size: 1.04rem; font-weight: 700; letter-spacing: -0.01em; }
+    .card-count {
+      font-size: 0.72rem; font-weight: 700; color: var(--c, var(--primary));
+      background: rgba(255,255,255,0.92); border-radius: 999px; padding: 1px 9px;
+    }
+    .chev {
+      margin-left: auto; width: 8px; height: 8px; flex: 0 0 8px;
+      border-right: 2px solid var(--text-3); border-bottom: 2px solid var(--text-3);
+      border-radius: 1px; transform: rotate(45deg); transition: transform 0.25s ease;
+    }
+    .card-head[aria-expanded="false"] .chev { transform: rotate(-45deg); }
+    .card-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows 0.3s ease; }
+    .card-body.collapsed { grid-template-rows: 0fr; }
+    /* padding has to go to zero as well, otherwise it keeps the row from closing */
+    .card-inner {
+      overflow: hidden; min-height: 0;
+      padding: 2px 20px 20px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: padding 0.3s ease;
+    }
+    .card-body.collapsed .card-inner { padding-top: 0; padding-bottom: 0; }
+    .subhead {
+      display: flex; align-items: center; gap: 9px;
+      margin: 4px 0 0; font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);
+    }
+    .subhead::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+    /* ---------- generic content ---------- */
+    .hl { color: #0D47A1; font-weight: 600; }
+    .about {
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 14px; padding: 16px 18px;
+    }
+    .about p + p { margin-top: 12px; }
+    .about p { font-size: 0.93rem; color: var(--text-2); }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 9px 15px; border-radius: 12px;
+      background: rgba(255,255,255,0.88); color: var(--text);
+      font-size: 0.87rem; font-weight: 550;
+      border: 1px solid rgba(255,255,255,0.95);
+      box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .chip:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(15,23,42,0.08); }
+
+    .entry {
+      display: flex; gap: 15px; padding: 15px 16px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 14px;
+    }
+    .logo {
+      width: 46px; height: 46px; flex: 0 0 46px;
+      display: grid; place-items: center; overflow: hidden;
+      border: 1px solid var(--line); border-radius: 12px; background: #fff;
+    }
+    .logo img { width: 32px; height: 32px; object-fit: contain; }
+    .entry-main { flex: 1; min-width: 0; }
+    .entry-title { font-size: 0.98rem; font-weight: 650; line-height: 1.5; }
+    .entry-sub { font-size: 0.87rem; color: var(--text-2); margin-top: 1px; }
+    .entry-meta {
+      display: flex; align-items: center; gap: 6px; margin-top: 4px;
+      font-size: 0.78rem; color: var(--text-3);
+    }
+    .entry-meta i { font-size: 0.85em; }
+    .bullets { margin-top: 9px; display: flex; flex-direction: column; gap: 5px; }
+    .bullet { display: flex; gap: 9px; font-size: 0.86rem; color: var(--text-2); }
+    .bullet::before {
+      content: ""; flex: 0 0 5px; width: 5px; height: 5px;
+      margin-top: 0.66em; border-radius: 50%; background: var(--c, var(--primary)); opacity: 0.6;
+    }
+    .link { color: var(--text); border-bottom: 1px solid rgba(15,23,42,0.16); transition: color 0.18s, border-color 0.18s; }
+    .link:hover { color: var(--primary); border-color: var(--primary); }
+
+    /* publications */
+    .pub {
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 16px; border-radius: 14px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.9);
+    }
+    .pub-thumb {
+      width: 188px; flex: 0 0 188px; border: 1px solid var(--line);
+      border-radius: 12px; overflow: hidden; background: #fafbfe;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .pub-thumb:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,0.10); }
+    .pub-thumb img { display: block; width: 100%; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 9px; }
+    .tag {
+      font-size: 0.7rem; font-weight: 650; border-radius: 999px;
+      padding: 2px 10px; color: var(--c, var(--primary)); background: #fff;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.05);
+    }
+    .pub-title { font-size: 1rem; font-weight: 650; line-height: 1.55; }
+    .pub-title a:hover { color: var(--c, var(--primary)); text-decoration: underline; text-underline-offset: 3px; }
+    .pub-authors { font-size: 0.85rem; color: var(--text-2); margin-top: 7px; }
+    .pub-authors strong { color: var(--text); font-weight: 700; }
+    .pub-venue { font-size: 0.82rem; color: var(--text-3); margin-top: 3px; }
+    .pub-abstract {
+      margin-top: 11px; padding-left: 13px; border-left: 2px solid var(--line);
+      font-size: 0.86rem; color: var(--text-2);
+    }
+    .doi {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 12px;
+      font-size: 0.76rem; font-weight: 600; color: var(--c, var(--primary));
+      background: #fff; border-radius: 999px; padding: 4px 12px;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.05);
+      transition: filter 0.18s;
+    }
+    .doi:hover { filter: brightness(0.96); }
+
+    /* awards */
+    .award {
+      display: flex; gap: 12px; padding: 13px 15px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 13px;
+    }
+    .award-no {
+      width: 22px; height: 22px; flex: 0 0 22px; margin-top: 3px;
+      display: grid; place-items: center; border-radius: 7px;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--c, var(--primary)); background: #fff;
+      box-shadow: 0 1px 2px rgba(15,23,42,0.05);
+    }
+    .award-main { flex: 1; min-width: 0; }
+    .award-title { font-size: 0.92rem; font-weight: 550; line-height: 1.55; }
+    .award-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 4px; font-size: 0.79rem; color: var(--text-3); }
+    .award-date { font-size: 0.78rem; color: var(--text-3); white-space: nowrap; margin-top: 3px; }
+
+    /* skills */
+    .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 14px; }
+    .skill-group {
+      border: 1px solid rgba(255,255,255,0.9); border-radius: 13px;
+      padding: 13px 15px; background: rgba(255,255,255,0.86);
+    }
+    .skill-group h4 {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 0.86rem; font-weight: 650; color: var(--text);
+    }
+    .skill-group h4 i { color: var(--g, var(--primary)); }
+    .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .pill {
+      font-size: 0.76rem; font-weight: 550; padding: 3px 10px; border-radius: 8px;
+      color: var(--g, var(--text-2)); background: var(--g-soft, #f4f6fa);
+    }
+
+    /* hobbies */
+    .hobby-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .hobby {
+      padding: 15px 16px; border: 1px solid rgba(255,255,255,0.9); border-radius: 14px;
+      background: rgba(255,255,255,0.86); transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .hobby:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,0.08); }
+    .hobby h4 { display: flex; align-items: center; gap: 10px; font-size: 0.92rem; font-weight: 650; }
+    .hobby .ic {
+      width: 30px; height: 30px; flex: 0 0 30px;
+      display: grid; place-items: center; border-radius: 9px;
+      background: var(--g-soft, #f4f6fa); color: var(--g, var(--primary)); font-size: 0.95rem;
+    }
+    .hobby p { margin-top: 8px; font-size: 0.84rem; color: var(--text-2); }
+    .hobby-note { margin-top: 16px; text-align: center; font-size: 0.88rem; color: var(--text-3); }
+
+    /* connect */
+    #connect {
+      background: linear-gradient(135deg, #f2f8ff 0%, #f7f2ff 50%, #f1fdf6 100%);
+      border-color: #e3ebf7;
+    }
+    .connect-list { display: flex; flex-direction: column; gap: 4px; }
+    .connect-row {
+      display: flex; align-items: center; gap: 13px;
+      padding: 10px 8px; border-radius: 12px; font-size: 0.91rem; color: var(--text-2);
+      background: rgba(255,255,255,0.72); transition: background 0.18s;
+    }
+    .connect-row:hover { background: rgba(255,255,255,0.95); }
+    .connect-row i {
+      width: 34px; height: 34px; flex: 0 0 34px;
+      display: grid; place-items: center; border-radius: 11px;
+      background: #fff; color: var(--primary); font-size: 0.95rem;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.07);
+    }
+    .connect-row a { color: var(--primary); font-weight: 650; }
+    .connect-row a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    /* footer + back to top */
+    .site-footer {
+      max-width: 1200px; margin: 0 auto; padding: 4px 32px 44px;
+      text-align: center; font-size: 0.8rem; color: var(--text-3);
+    }
+    #toTop {
+      position: fixed; right: 26px; bottom: 26px; z-index: 99;
+      width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 13px;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(8px);
+      color: var(--primary); font-size: 0.9rem; cursor: pointer;
+      box-shadow: var(--shadow-2); opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    #toTop.show { opacity: 1; pointer-events: auto; }
+    #toTop:hover { transform: translateY(-3px); }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 860px) {
+      .page { flex-direction: column; padding: 20px 16px 44px; gap: 20px; }
+      .sidebar { width: 100%; flex: 1 1 auto; }
+      .profile { position: static; }
+      .hobby-grid, .skill-grid { grid-template-columns: 1fr; }
+      .pub { flex-direction: column; gap: 14px; }
+      .pub-thumb { width: 100%; flex: 1 1 auto; }
+      .masthead__inner { padding: 0 16px; }
+      .site-footer { padding: 0 16px 36px; }
+    }
+    @media (max-width: 480px) {
+      .masthead__inner { gap: 12px; }
+      .brand { width: 190px; flex: 0 0 190px; font-size: 0.92rem; }
+      .award { flex-wrap: wrap; }
+      .award-date { margin-left: 34px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="masthead" id="masthead">
+    <div class="masthead__inner">
+      <span class="brand">Homepage</span>
+      <ul class="nav-list nav-links" id="navLinks">
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#research">Research Areas</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#projects">Professional Experience</a></li>
+        <li><a href="#publications">Selected Publications</a></li>
+        <li><a href="#honors-awards">Honors and Awards</a></li>
+        <li><a href="#skills">Skills &amp; Ideas</a></li>
+        <li><a href="#courses">Hobbies &amp; Interests</a></li>
+        <li><a href="#connect">Let's Connect</a></li>
+      </ul>
+      <div class="nav-more-wrap">
+        <button class="nav-toggle" type="button" aria-label="More sections" aria-controls="navMore" aria-expanded="false">
+          <i class="fas fa-bars" aria-hidden="true"></i><i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+        <ul class="nav-list nav-more" id="navMore"></ul>
+      </div>
+    </div>
+  </header>
+
+  <div class="page">
+
+    <aside class="sidebar">
+      <div class="profile">
+        <img src="images/lijiajie.jpg" alt="Jiajie Li" class="avatar">
+        <h1>Jiajie Li<span class="cn">李嘉杰</span></h1>
+        <div class="role"><span class="dot"></span>PhD Candidate</div>
+        <ul class="contact">
+          <li><span><i class="fas fa-map-marker-alt"></i> Wuhan, China</span></li>
+          <li><a href="mailto:2023102130028@whu.edu.cn"><i class="fas fa-envelope"></i> Email</a></li>
+          <li><a href="https://github.com/Open-LEE" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+          <li><a href="https://scholar.google.com/citations?hl=en&amp;user=ocxtrhsAAAAJ&amp;view_op=list_works&amp;gmla=ACrTK9XjklJjCfMvxqtmTgQHdE8C-3pkF7aDse4_Jy46PImZJAAr9hwH3vgtyMztdnENq148-nsS81O1Tsx0WitHBZOhqC01RQ-QcRuI5VAxwKPKW2ZP8fgXmwSyC00vEXLsQiD1" target="_blank"><i class="fas fa-graduation-cap"></i> Google Scholar</a></li>
+          <li><a href="https://orcid.org/0009-0006-3396-3956" target="_blank"><i class="fab fa-orcid"></i> ORCID</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="content">
+
+      <section id="about" class="card" style="--c:#1976D2; --c-soft:#DFEBFC; --c-hover:rgba(25,118,210,0.13);">
+        <button class="card-head" type="button" aria-expanded="true">
+          <span class="card-icon">📖</span>
+          <span class="card-title">About Me</span>
+          <span class="chev"></span>
+        </button>
+        <div class="card-body"><div class="card-inner">
+          <div class="about">
+            <p>🎓 I am Jiajie Li, a PhD candidate based in Wuhan, focusing on <span class="hl">computer vision and spatiotemporal image processing</span>. My research interests include image reconstruction, inpainting, super-resolution, and multi-source data fusion. I am currently developing unified vision frameworks that integrate spatial, temporal, and multimodal information, with a strong interest in deep learning and practical computer vision applications.</p>
+            <p>🌱 With an interdisciplinary background in <span class="hl">environmental ecology, remote sensing, and mathematical statistics</span>, I have developed a strong foundation in spatial analysis and temporal modeling. My research has evolved from traditional image processing and statistical methods to deep learning-based image reconstruction and multimodal fusion, enabling me to approach vision problems from both theoretical and real-world perspectives.</p>
+            <p>💻 I enjoy exploring emerging topics in <span class="hl">computer vision, image and video processing, and multimodal large models</span>. I value continuous learning, open collaboration, and technical exchange. Feel free to reach out if you are interested in academic discussions, research collaboration, or related projects.</p>
+          </div>
+        </div></div>
+      </section>
+
+      <section id="research" class="card" style="--c:#7B1FA2; --c-soft:#EFE1F7; --c-hover:rgba(123,31,162,0.12);">
+        <button class="card-head" type="button" aria-expanded="true">
+          <span class="card-icon">🔬</span>
+          <span class="card-title">Research Areas</span>
+          <span class="chev"></span>
+        </button>
+        <div class="card-body"><div class="card-inner">
+          <div class="chips">
+            <span class="chip">🧠 Spatiotemporal Image Reconstruction</span>
+            <span class="chip">👁️ Computer Vision</span>
+            <span class="chip">🎯 Object Extraction &amp; Tracking</span>
+          </div>
+        </div></div>
+      </section>
+
+      <section id="education" class="card" style="--c:#4CAF50; --c-soft:#E1F3E5; --c-hover:rgba(76,175,80,0.16);">
+        <button class="card-head" type="button" aria-expanded="true">
+          <span class="card-icon">🎓</span>
+          <span class="card-title">Education</span>
+          <span class="card-count">2</span>
+          <span class="chev"></span>
+        </button>
+        <div class="card-body"><div class="card-inner">
+          <div class="entry">
+            <div class="logo"><img src="images/WHU.webp" alt="Wuhan University"></div>
+            <div class="entry-main">
+              <div class="entry-title">Wuhan University</div>
+              <div class="entry-sub">Ph.D. in Remote Sensing</div>
+              <div class="entry-meta"><i class="fas fa-location-dot"></i> Wuhan &middot; Sept 2023 &ndash; Present</div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="logo"><img src="images/xmu_logo.jpeg" alt="Xiamen University"></div>
+            <div class="entry-main">
+              <div class="entry-title">Xiamen University</div>
+              <div class="entry-sub">B.S. in Environmental Ecological Engineering &amp; Statistics (Dual Degree)</div>
+              <div class="entry-meta"><i class="fas fa-location-dot"></i> Xiamen &middot; Sept 2019 &ndash; June 2023</div>
+            </div>
+          </div>
+        </div></div>
+      </section>
+
+      <section id="projects" class="card" style="--c:#FF9800; --c-soft:#FFEAD3; --c-hover:rgba(255,152,0,0.18);">
+        <button class="card-head" type="button" aria-expanded="true">
+          <span class="card-icon">💼</span>
+          <span class="card-title">Professional Experience</span>
+          <span class="card-count">3</span>
+          <span class="chev"></span>
+        </button>
+        <div class="card-body"><div class="card-inner">
+          <div class="entry">
+            <div class="logo"><img src="images/Datawhale.png" alt="Datawhale"></div>
+            <div class="entry-main">
+              <div class="entry-title"><a href="https://www.datawhale.cn/" target="_blank" class="link">Datawhale</a></div>
+              <div class="entry-sub">Outstanding Teaching Assistant, <a href="prove/datawhale-awards/outstanding-learner.png" target="_blank" class="link">Outstanding Learner</a></div>
+              <div class="entry-meta"><i class="fas fa-location-dot"></i> Online &amp; Offline &middot; 2023 &ndash; Present</div>
+              <div class="bullets">
+                <div class="bullet">Participated in multiple AI-themed team learning courses organized by Datawhale.</div>
+              </div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="logo"><img src="images/xmu_logo.jpeg" alt="XMU"></div>
+            <div class="entry-main">
+              <div class="entry-title"><a href="https://github.com/wise-r" target="_blank" class="link">Xiamen University WISER Club</a></div>
+              <div class="entry-sub"><a href="prove/wiser-club/wiser_club.png" target="_blank" class="link">Insider</a>, Machine Learning Group</div>
+              <div class="entry-meta"><i class="fas fa-location-dot"></i> Xiamen &middot; Aug 2022 &ndash; July 2023</div>
+              <div class="bullets">
+                <div class="bullet">Participated in multiple academic seminars and in-depth discussions on deep learning algorithms.</div>
+                <div class="bullet">Participated in curriculum design and delivered lectures on machine learning and reinforcement learning algorithms.</div>
+              </div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="logo"><img src="images/xmu_logo.jpeg" alt="XMU"></div>
+            <div class="entry-main">
+              <div class="entry-title"><a href="https://www.bilibili.com/video/BV1xD4y1B7Pj/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=7963c350962c106b2634f61b9b7c43e5" target="_blank" class="link">Xiamen University Maritime Silk Program</a></div>
+              <div class="entry-sub">Conducted scientific practice in the South China Sea</div>
+              <div class="entry-meta"><i class="fas fa-location-dot"></i> Xiamen &ndash; South China Sea &middot; Aug 2022</div>
+              <div class="bullets">
+                <div class="bullet">Participated in a multidisciplinary marine scientific expedition aboard the research vessel Jiageng, focusing on marine environmental monitoring and data collection.</div>
+              </div>
+            </div>
+          </div>
+        </div></div>
+      </section>
+
+      <section id="publications" class="card" style="--c:#C62828; --c-soft:#F9E2E2; --c-hover:rgba(198,40,40,0.12);">
+        <button class="card-head" type="button" aria-expanded="true">
+          <span class="card-icon">📄</span>
+          <span class="card-title">Selected Publications</span>
+          <span class="card-count">1</span>
+          <span class="chev"></span>
+        </button>
+        <div class="card-body"><div class="card-inner">
+          <article class="pub">
+            <a class="pub-thumb" href="https://doi.org/10.1080/2150704X.2026.2629348" target="_blank">
+              <img src="article/RSL2026.jpg" alt="Paper">
+            </a>
+            <div>
+              <div class="tags">
+                <span class="tag">Macroalgae Detection</span>
+                <span class="tag">Deep Learning</span>
+              </div>
+              <h3 class="pub-title"><a href="https://doi.org/10.1080/2150704X.2026.2629348" target="_blank">A novel weighted loss function for improved deep learning-based detection of floating macroalgae blooms in multispectral imagery</a></h3>
+              <div class="pub-authors">Mingqing Liu, Yichao Zou, <strong>Jiajie Li</strong>, Yue Sun, Zhongbin B. Li &amp; Mengqiu Wang</div>
+              <div class="pub-venue"><em>Remote Sensing Letters</em>, 2026, 17:3, 336-346</div>
+              <p class="pub-abstract">A novel weighted loss function that mitigates class imbalance and improves discrimination against spectrally similar noise, significantly enhancing deep learning-based detection of floating macroalgae in multispectral remote sensing imagery.</p>
+              <a class="doi" href="https://doi.org/10.1080/2150704X.2026.2629348" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> doi:10.1080/2150704X.2026.2629348</a>
+            </div>
+          </article>
+        </div></div>
+      </section>
+
+      <section id="honors-awards" class="card" style="--c:#FBC02D; --c-soft:#FCF1D6; --c-hover:rgba(251,192,45,0.24);">
+        <button class="card-head" type="button" aria-expanded="true">
+          <span class="card-icon">🥇</span>
+          <span class="card-title">Honors and Awards</span>
+          <span class="card-count">7</span>
+          <span class="chev"></span>
+        </button>
+        <div class="card-body"><div class="card-inner">
+          <div class="subhead">Academic Honors</div>
+          <div class="award">
+            <span class="award-no">1</span>
+            <div class="award-main">
+              <div class="award-title"><a href="prove/academic-honors/w_w_scholarship.png" target="_blank" class="link">Wang Shujing &amp; Wang Wendou Scholarship</a></div>
+              <div class="award-meta"><span>Level: City-level</span><span>Achievement: Recognized for outstanding academic performance</span></div>
+            </div>
+            <span class="award-date">January 2022</span>
+          </div>
+          <div class="subhead">Competition Awards</div>
+          <div class="award">
+            <span class="award-no">1</span>
+            <div class="award-main">
+              <div class="award-title"><a href="prove/competition-awards/2022-mcm-h.pdf" target="_blank" class="link">Mathematical Contest In Modeling (MCM), Honorable Mention <i class="fas fa-file-pdf" style="color:#E53935;font-size:0.85em;"></i></a></div>
+              <div class="award-meta"><span>Level: International Competition</span><span>Region: United States</span></div>
+            </div>
+            <span class="award-date">February 2022</span>
+          </div>
+          <div class="award">
+            <span class="award-no">2</span>
+            <div class="award-main">
+              <div class="award-title"><a href="prove/competition-awards/2021-national-math-fujian-first.pdf" target="_blank" class="link">Higher Education Cup National Mathematical Modeling Competition, Fujian First Prize <i class="fas fa-file-pdf" style="color:#E53935;font-size:0.85em;"></i></a></div>
+              <div class="award-meta"><span>Level: Provincial Competition</span><span>Region: Fujian Province</span></div>
+            </div>
+            <span class="award-date">September 2021</span>
+          </div>
+          <div class="award">
+            <span class="award-no">3</span>
+            <div class="award-main">
+              <div class="award-title"><a href="prove/competition-awards/7th-xmu-internet-plus-gold.pdf" target="_blank" class="link">Xiamen University "Internet+" Innovation and Entrepreneurship Competition, Gold Award <i class="fas fa-file-pdf" style="color:#E53935;font-size:0.85em;"></i></a></div>
+              <div class="award-meta"><span>Level: University Competition</span><span>Region: Fujian Province</span></div>
+            </div>
+            <span class="award-date">July 2021</span>
+          </div>
+          <div class="award">
+            <span class="award-no">4</span>
+            <div class="award-main">
+              <div class="award-title"><a href="prove/competition-awards/13th-csee-cup-first.pdf" target="_blank" class="link">"CSEE Cup" Mathematical Modeling Competition, National First Prize <i class="fas fa-file-pdf" style="color:#E53935;font-size:0.85em;"></i></a></div>
+              <div class="award-meta"><span>Level: National Competition</span><span>Region: China</span></div>
+            </div>
+            <span class="award-date">May 2021</span>
+          </div>
+          <div class="award">
+            <span class="award-no">5</span>
+            <div class="award-main">
+              <div class="award-title"><a href="prove/competition-awards/xmu-physics-15th-third.pdf" target="_blank" class="link">Xiamen University 15th Physics Competition, Third Place <i class="fas fa-file-pdf" style="color:#E53935;font-size:0.85em;"></i></a></div>
+              <div class="award-meta"><span>Level: University Competition</span><span>Region: Fujian Province</span></div>
+            </div>
+            <span class="award-date">May 2021</span>
+          </div>
+          <div class="award">
+            <span class="award-no">6</span>
+            <div class="award-main">
+              <div class="award-title"><a href="https://www.noi.cn/ccf/file/do?fid=G8hDM5yB&amp;attach=n" target="_blank" class="link">NOIP 2014 National Youth Informatics Olympiad League <i class="fas fa-arrow-up-right-from-square" style="color:#1976D2;font-size:0.85em;"></i></a></div>
+              <div class="award-meta"><span>Level: National Competition</span><span>Region: China</span></div>
+            </div>
+            <span class="award-date">2014</span>
+          </div>
+        </div></div>
+      </section>
+
+      <section id="skills" class="card" style="--c:#00796B; --c-soft:#D9EFEB; --c-hover:rgba(0,121,107,0.12);">
+        <button class="card-head" type="button" aria-expanded="true">
+          <span class="card-icon">🔮</span>
+          <span class="card-title">Skills &amp; Ideas</span>
+          <span class="card-count">2</span>
+          <span class="chev"></span>
+        </button>
+        <div class="card-body"><div class="card-inner">
+          <div class="subhead">Skills</div>
+          <div class="skill-grid">
+            <div class="skill-group" style="--g:#1976D2; --g-soft:#E7F0FD;">
+              <h4><i class="fas fa-code"></i> Programming</h4>
+              <div class="pills">
+                <span class="pill">Python</span><span class="pill">Matlab</span><span class="pill">R</span>
+                <span class="pill">Stata</span><span class="pill">C</span><span class="pill">C++</span>
+                <span class="pill">Mathematica</span><span class="pill">LaTeX</span><span class="pill">Linux</span>
+              </div>
+            </div>
+            <div class="skill-group" style="--g:#C2185B; --g-soft:#FBE7EF;">
+              <h4><i class="fas fa-brain"></i> Deep Learning</h4>
+              <div class="pills"><span class="pill">PyTorch</span><span class="pill">TensorFlow</span></div>
+            </div>
+            <div class="skill-group" style="--g:#00796B; --g-soft:#E2F2F0;">
+              <h4><i class="fas fa-chart-bar"></i> Data &amp; Analysis</h4>
+              <div class="pills"><span class="pill">Pandas</span><span class="pill">NumPy</span></div>
+            </div>
+            <div class="skill-group" style="--g:#E65100; --g-soft:#FFF0E0;">
+              <h4><i class="fas fa-laptop-code"></i> Web Development</h4>
+              <div class="pills"><span class="pill">HTML</span><span class="pill">JavaScript</span></div>
+            </div>
+            <div class="skill-group" style="--g:#546E7A; --g-soft:#ECEFF1;">
+              <h4><i class="fas fa-cogs"></i> Tools &amp; Infrastructure</h4>
+              <div class="pills"><span class="pill">Git</span><span class="pill">CUDA</span></div>
+            </div>
+            <div class="skill-group" style="--g:#2E7D32; --g-soft:#E8F5E9;">
+              <h4><i class="fas fa-globe"></i> GIS</h4>
+              <div class="pills"><span class="pill">ArcGIS</span><span class="pill">Google Earth Engine</span><span class="pill">ENVI</span></div>
+            </div>
+            <div class="skill-group" style="--g:#546E7A; --g-soft:#ECEFF1;">
+              <h4><i class="fas fa-cube"></i> Tools</h4>
+              <div class="pills"><span class="pill">AutoCAD</span><span class="pill">PS</span><span class="pill">PR</span><span class="pill">Gabi</span><span class="pill">Leap</span></div>
+            </div>
+            <div class="skill-group" style="--g:#3949AB; --g-soft:#E8EAF6;">
+              <h4><i class="fas fa-language"></i> Languages</h4>
+              <div class="pills">
+                <span class="pill">English (CET-6, IELTS)</span><span class="pill">Chinese (Native)</span>
+                <span class="pill">Malay (Beginner)</span><span class="pill">Japanese (Studying)</span>
+              </div>
+            </div>
+          </div>
+          <div class="subhead">Ideas</div>
+          <div class="entry" style="padding-top:8px;">
+            <div class="entry-main">
+              <div class="entry-title"><span style="font-weight:700;margin-right:6px;">[1]</span><i class="fab fa-github" style="color:var(--primary);font-size:0.85em;margin-right:5px;"></i><a href="https://github.com/Open-LEE/Autosatpack" target="_blank" class="link">Autosatpack</a></div>
+              <div class="bullets"><div class="bullet">A fully automated remote sensing data download and processing script that runs on HPC clusters and servers.</div></div>
+            </div>
+          </div>
+          <div class="entry">
+            <div class="entry-main">
+              <div class="entry-title"><span style="font-weight:700;margin-right:6px;">[2]</span><i class="fab fa-github" style="color:var(--primary);font-size:0.85em;margin-right:5px;"></i><a href="https://github.com/Open-LEE/Texas-Calculator" target="_blank" class="link">Texas-Calculator</a></div>
+              <div class="bullets"><div class="bullet">A Texas Hold'em odds simulator that calculates real-time win rates and offers actionable tips to sharpen your poker decision-making.</div></div>
+            </div>
+          </div>
+        </div></div>
+      </section>
+
+      <section id="courses" class="card" style="--c:#3949AB; --c-soft:#E4E7F7; --c-hover:rgba(57,73,171,0.12);">
+        <button class="card-head" type="button" aria-expanded="true">
+          <span class="card-icon">🎮</span>
+          <span class="card-title">Hobbies &amp; Interests</span>
+          <span class="chev"></span>
+        </button>
+        <div class="card-body"><div class="card-inner">
+          <div class="hobby-grid">
+            <div class="hobby" style="--g:#E91E63; --g-soft:#FCE4EC;">
+              <h4><span class="ic"><i class="fas fa-music"></i></span>Music</h4>
+              <p>I'm into singing, and I've also picked up a few instruments along the way – <a href="https://www.bilibili.com/video/BV1QA411z7gD/?spm_id_from=333.1387.upload.video_card.click&amp;vd_source=7963c350962c106b2634f61b9b7c43e5" target="_blank" class="link">flute</a>, kazoo, and <a href="https://www.bilibili.com/video/BV1kim8Y2Eox/?spm_id_from=333.1387.homepage.video_card.click&amp;vd_source=7963c350962c106b2634f61b9b7c43e5" target="_blank" class="link">piano</a>.</p>
+            </div>
+            <div class="hobby" style="--g:#4CAF50; --g-soft:#E8F5E9;">
+              <h4><span class="ic"><i class="fas fa-running"></i></span>Sports</h4>
+              <p>I love <a href="prove/hobby-items/running.jpg" target="_blank" class="link">running</a>, <a href="prove/hobby-items/marathons.jpg" target="_blank" class="link">marathons</a>, <a href="prove/hobby-items/football.jpg" target="_blank" class="link">football</a>, badminton, and table tennis – now picking up rock climbing and tennis.</p>
+            </div>
+            <div class="hobby" style="--g:#FF9800; --g-soft:#FFF3E0;">
+              <h4><span class="ic"><i class="fas fa-gamepad"></i></span>Games</h4>
+              <p>I love MOBA games, board games, and Switch games. Currently learning <a href="prove/hobby-items/chess.jpg" target="_blank" class="link">chess</a> – hit me up if you want to play together!</p>
+            </div>
+            <div class="hobby" style="--g:#2196F3; --g-soft:#E3F2FD;">
+              <h4><span class="ic"><i class="fas fa-hiking"></i></span>Hiking &amp; Traveling</h4>
+              <p>I've conquered trails like Mount Wugong, Mount Lu, and <a href="prove/hobby-items/maclehose-trail.jpg" target="_blank" class="link">the MacLehose Trail</a> – determined to keep pushing my limits and scaling greater peaks.</p>
+            </div>
+          </div>
+          <div class="hobby-note">Welcome friends with similar interests to connect and share life with me! 👋</div>
+        </div></div>
+      </section>
+
+      <section id="connect" class="card" style="--c:#1976D2; --c-soft:#DFEBFC; --c-hover:rgba(25,118,210,0.13);">
+        <button class="card-head" type="button" aria-expanded="true">
+          <span class="card-icon">📬</span>
+          <span class="card-title">Let's Connect</span>
+          <span class="chev"></span>
+        </button>
+        <div class="card-body"><div class="card-inner">
+          <div class="connect-list">
+            <div class="connect-row">
+              <i class="fas fa-envelope"></i>
+              <span>Email: <a href="mailto:open_l@outlook.com">open_l@outlook.com</a></span>
+            </div>
+            <div class="connect-row">
+              <i class="fas fa-briefcase"></i>
+              <span>I'm eager to connect with fellow deep learning enthusiasts and researchers passionate about advancing AI.</span>
+            </div>
+            <div class="connect-row">
+              <i class="fas fa-location-dot"></i>
+              <span>Wuhan, China</span>
+            </div>
+          </div>
+        </div></div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="site-footer"><span id="lastUpdated"></span></footer>
+  <button id="toTop" type="button" aria-label="Back to top">&#9650;</button>
+
+  <script>
+    document.getElementById("lastUpdated").textContent = "Last updated: 2026-07-02 00:26:07";
+  </script>
+
+  <script>
+    // collapsible sections
+    document.querySelectorAll('.card-head').forEach(function (head) {
+      head.addEventListener('click', function () {
+        var body = head.nextElementSibling;
+        var open = head.getAttribute('aria-expanded') === 'true';
+        head.setAttribute('aria-expanded', open ? 'false' : 'true');
+        if (body) body.classList.toggle('collapsed', open);
+      });
+    });
+
+    // masthead shadow + back to top
+    (function () {
+      var bar = document.getElementById('masthead');
+      var btn = document.getElementById('toTop');
+      function onScroll() {
+        var y = window.scrollY || document.documentElement.scrollTop;
+        bar.classList.toggle('scrolled', y > 8);
+        btn.classList.toggle('show', y > 400);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      btn.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      onScroll();
+    })();
+
+    // navigation: show as many links as fit next to the brand, move the rest into the menu
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var menu = document.getElementById('navLinks');
+      var more = document.getElementById('navMore');
+      if (!toggle || !menu || !more) return;
+      var links = Array.prototype.slice.call(menu.querySelectorAll('li'));
+      var GAP = 2, SAFETY = 2;
+
+      function setOpen(open) {
+        more.classList.toggle('show', open);
+        toggle.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Hide extra sections' : 'More sections');
+      }
+
+      function layout() {
+        setOpen(false);
+        links.forEach(function (li) { menu.appendChild(li); });
+        toggle.classList.add('show');
+        var avail = menu.clientWidth - SAFETY;
+        var used = 0, cut = links.length;
+        for (var i = 0; i < links.length; i++) {
+          var w = links[i].getBoundingClientRect().width + (i ? GAP : 0);
+          if (used + w > avail) { cut = i; break; }
+          used += w;
+        }
+        if (cut === links.length) { toggle.classList.remove('show'); return; }
+        for (var j = cut; j < links.length; j++) more.appendChild(links[j]);
+      }
+
+      toggle.addEventListener('click', function (e) {
+        e.stopPropagation();
+        setOpen(!more.classList.contains('show'));
+      });
+      more.addEventListener('click', function (e) {
+        if (e.target && e.target.closest('a')) setOpen(false);
+      });
+      document.addEventListener('click', function (e) {
+        if (!more.classList.contains('show')) return;
+        if (!more.contains(e.target) && !toggle.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') setOpen(false);
+      });
+
+      var timer;
+      window.addEventListener('resize', function () {
+        clearTimeout(timer);
+        timer = setTimeout(layout, 120);
+      });
+      window.addEventListener('load', layout);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+      layout();
+    })();
+  </script>
+</body>
+</html>
